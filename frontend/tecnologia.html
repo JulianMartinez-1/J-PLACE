@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tecnología — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="index.html#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="index.html#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <a href="cart.html" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:inline-flex;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <nav class="breadcrumbs" style="padding:1rem 2rem;background:#f8f9fa;font-size:0.9rem">
+    <a href="index.html" style="color:#666;text-decoration:none">🏠 Inicio</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <a href="index.html#productos" style="color:#666;text-decoration:none">Productos</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <span style="color:#20A86F;font-weight:600">Tecnología</span>
+  </nav>
+
+  <section class="category-hero tecnologia-hero" data-category="tecnologia" style="background-image: linear-gradient(135deg, rgba(52,152,219,0.9), rgba(155,89,182,0.8)), url('images/TECNOLOGIA.jpg');background-size:cover;background-position:center;min-height:350px;display:flex;align-items:center;position:relative;overflow:hidden">
+    <div class="hero-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);z-index:1"></div>
+    <div class="hero-inner" style="position:relative;z-index:2;color:white;text-align:center;max-width:900px;margin:0 auto;padding:2rem">
+      <span class="hero-badge" style="display:inline-block;background:rgba(255,255,255,0.2);padding:0.5rem 1.5rem;border-radius:50px;font-size:0.9rem;margin-bottom:1rem;backdrop-filter:blur(10px)">📱 Innovación & Tecnología</span>
+      <h1 style="font-size:3rem;margin:1rem 0;text-shadow:0 2px 10px rgba(0,0,0,0.3)" data-i18n="category.tecnologia.title">Tecnología</h1>
+      <p style="font-size:1.2rem;margin-bottom:2rem;opacity:0.95" data-i18n="category.tecnologia.lead">Explora lo último en gadgets, electrónica y accesorios</p>
+      <div class="hero-stats" style="display:flex;justify-content:center;gap:3rem;margin-top:2rem">
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">800+</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Productos</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">4.9⭐</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Calificación</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">24h</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Envío express</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subcategories-section" style="padding:3rem 2rem;background:#f8f9fa">
+    <h2 style="text-align:center;margin-bottom:2rem;font-size:2rem;color:#333">📱 Explora por Categoría</h2>
+    <div class="subcategories-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto">
+      <a href="#celulares" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">📱</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#3498db">Celulares</h3>
+        <span style="font-size:0.9rem;color:#666">156 productos</span>
+      </a>
+      <a href="#computadoras" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">💻</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#3498db">Computadoras</h3>
+        <span style="font-size:0.9rem;color:#666">203 productos</span>
+      </a>
+      <a href="#audio" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🎧</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#3498db">Audio</h3>
+        <span style="font-size:0.9rem;color:#666">98 productos</span>
+      </a>
+      <a href="#wearables" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">⌚</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#3498db">Wearables</h3>
+        <span style="font-size:0.9rem;color:#666">67 productos</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="filters-enhanced" style="padding:2rem;background:white;border-bottom:1px solid #eee;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;justify-content:center;max-width:1400px;margin:0 auto">
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">🔍 Buscar:</label>
+      <input type="search" placeholder="iPhone, laptop..." class="filter-search" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;width:200px;font-size:0.95rem">
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Ordenar:</label>
+      <select class="filter-select" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;background:white;cursor:pointer">
+        <option>⭐ Más populares</option>
+        <option>💰 Menor precio</option>
+        <option>💎 Mayor precio</option>
+        <option>🆕 Más recientes</option>
+      </select>
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Rango de precio:</label>
+      <div class="price-range" style="display:flex;align-items:center;gap:0.5rem">
+        <input type="number" placeholder="$0" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+        <span style="color:#999">—</span>
+        <input type="number" placeholder="$2000" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+      </div>
+    </div>
+  </div>
+
+  <section class="products-grid" aria-label="Productos de tecnología" style="padding:2rem;max-width:1400px;margin:0 auto">
+    <article class="product-card enhanced" data-subcategory="celulares" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#ff4757;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">🔥 Best Seller</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/iphone.jpg" alt="iPhone" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">📱 Smartphones</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">iPhone</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">iPhone de última generación con cámara avanzada y rendimiento superior.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(342 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$999.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="audio" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#9b59b6;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">✨ Premium</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/audifonos-inalambricos.webp" alt="Auriculares" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">🎧 Audio</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Auriculares Inalámbricos</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Sonido envolvente, cancelación de ruido y batería de larga duración.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(218 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$129.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="wearables" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/smartwacht.webp" alt="Smartwatch" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">⌚ Wearables</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Smartwatch</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Rastreador de actividad y notificaciones inteligentes con diseño elegante.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐☆ <span style="color:#999;font-size:0.85rem">(156 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$199.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="computadoras" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#e74c3c;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">🎮 Gaming</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/pc gamer.jpg" alt="PC Gamer" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">💻 Computadoras</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">PC Gamer</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Equipo con GPU dedicada para gaming y productividad a alta velocidad.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(89 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$1,499.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="celulares" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#ffa502;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">💰 Oferta</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/Smartphone1.webp" alt="Smartphone" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">📱 Smartphones</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Smartphone</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Teléfono con excelente relación calidad-precio y buena cámara.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(267 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group" style="display:flex;flex-direction:column;gap:0.3rem">
+            <span class="price-old" style="text-decoration:line-through;color:#999;font-size:0.9rem">$449.00</span>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$349.00</span>
+              <span class="discount" style="background:#ffa502;color:white;padding:0.2rem 0.5rem;border-radius:5px;font-size:0.8rem;font-weight:600">-22%</span>
+            </div>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="audio" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/parlante.jpg" alt="Parlante" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">🎧 Audio</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Parlante Bluetooth</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Parlante compacto con gran potencia y conectividad inalámbrica estable.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐☆ <span style="color:#999;font-size:0.85rem">(123 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$79.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-card enhanced" data-subcategory="computadoras" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#20A86F;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">✨ Nuevo</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/monitores.avif" alt="Monitor" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#3498db;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">💻 Computadoras</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Monitor Full HD</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Monitor con resolución Full HD y colores nítidos para trabajo y juego.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(178 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#3498db">$249.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#3498db;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div style="text-align:center; padding:2rem 0;">
+    <button class="load-more" data-i18n="misc.loadMore" style="background:#3498db;color:white;border:none;padding:1rem 3rem;border-radius:50px;cursor:pointer;font-size:1rem;font-weight:600;box-shadow:0 4px 15px rgba(52,152,219,0.3);transition:all 0.3s ease">Cargar más productos</button>
+  </div>
+
+  <section class="category-benefits" style="background:linear-gradient(135deg,#3498db,#9b59b6);padding:3rem 2rem;margin-top:3rem">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem">
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🚀</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Envío Express 24h</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Recibe tu tecnología al día siguiente</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🔒</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Garantía Oficial</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Productos originales con 1 año de garantía</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">💳</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Pagos Seguros</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Meses sin intereses disponibles</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🎁</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Ofertas Exclusivas</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Descuentos en compras múltiples</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Cargar productos dinámicos desde la base de datos
+    (async function() {
+      // Siempre usar el puerto del backend (4000)
+      const BACKEND_URL = 'http://localhost:4000';
+      const productsContainer = document.querySelector('.products-grid');
+      
+      if (!productsContainer) return;
+
+      try {
+        // Obtener productos de esta categoría
+        const response = await fetch(`${BACKEND_URL}/api/productos?category=tecnologia`);
+        const productos = await response.json();
+        
+        if (productos && productos.length > 0) {
+          console.log(`✅ Cargados ${productos.length} productos de tecnología desde DB`);
+          
+          // Agregar productos reales al final (mantener los de ejemplo)
+          productos.forEach(producto => {
+            const productCard = createProductCard(producto);
+            productsContainer.appendChild(productCard);
+          });
+        } else {
+          console.log('ℹ️ No hay productos aprobados en tecnología');
+        }
+      } catch (error) {
+        console.error('❌ Error cargando productos:', error);
+      }
+
+      function createProductCard(producto) {
+        const card = document.createElement('div');
+        card.className = 'product-card fade-in';
+        card.style = 'background:white;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease;cursor:pointer';
+        
+        // Usar la primera imagen del producto
+        const imageSrc = producto.images && producto.images.length > 0 
+          ? `${BACKEND_URL}${producto.images[0]}` 
+          : 'images/placeholder.jpg';
+        
+        card.innerHTML = `
+          <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+            <img src="${imageSrc}" alt="${producto.nombre}" style="width:100%;height:250px;object-fit:cover;background:#f0f0f0" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:250px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:3rem\\'>📦</div>';" />
+            <span class="badge-new" style="position:absolute;top:15px;left:15px;background:#20A86F;color:white;padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;font-weight:600;box-shadow:0 2px 8px rgba(32,168,111,0.3)">Nuevo</span>
+          </div>
+          <div class="product-card-body" style="padding:1.5rem">
+            <h3 style="font-size:1.1rem;margin-bottom:0.8rem;color:#333;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${producto.nombre}</h3>
+            <p class="product-description" style="color:#666;font-size:0.9rem;margin-bottom:1rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${producto.descripcion}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+              <span class="product-price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$${Number(producto.precio).toLocaleString('es-MX')}</span>
+              <button class="btn-add-cart" data-id="${producto._id}" style="background:#20A86F;color:white;border:none;padding:0.7rem 1.5rem;border-radius:25px;font-weight:600;cursor:pointer;transition:all 0.3s ease;font-size:0.9rem">
+                🛒 Agregar
+              </button>
+            </div>
+          </div>
+        `;
+
+        // Agregar evento de click al botón
+        const btnCart = card.querySelector('.btn-add-cart');
+        btnCart.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // La función addToCart debería estar definida en cart.js
+          if (typeof addToCart === 'function') {
+            addToCart(producto._id);
+          }
+        });
+
+        // Click en la card para ver detalles
+        card.addEventListener('click', () => {
+          window.location.href = `producto-detalle.html?id=${producto._id}`;
+        });
+
+        return card;
+      }
+    })();
+  </script>
+</body>
+</html>

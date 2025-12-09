@@ -1,0 +1,19 @@
+{
+  "nav": { "inicio": "Home", "productos": "Products", "beneficios": "Benefits", "contacto": "Contact", "register": "Sign up" },
+  "hero": { "title": "Buy and sell with confidence", "lead": "Find unique products and personalized recommendations. List items in minutes and reach real buyers.", "explore": "Explore categories", "register": "Sign up" },
+  "trust": { "t1": "🚚 Fast shipping", "t2": "🔒 Secure payments", "t3": "⭐ 24/7 support" },
+  "testimonials": { "title": "What our users say", "t1": "I found a phone in perfect condition at an amazing price. The process was quick and the seller was very kind.", "a1": "- Maria, Bogotá", "t2": "Selling my furniture here was easy. The listing tools are clear and I received offers within hours.", "a2": "- Andrés, Medellín", "t3": "Customer service helped with a return. Excellent support and safe experience.", "a3": "- Camila, Cali" },
+  "newsletter": { "title": "Get exclusive offers", "p": "Subscribe to our newsletter and get 10% off your first purchase.", "placeholder": "you@email.com", "btn": "Subscribe", "thankyou": "Thanks! We sent a confirmation email (simulated)." },
+  "productos": { "title": "Explore popular categories" },
+  "productos_extra": { "deportes": "Sports" },
+  "category": {
+    "moda": { "title": "Fashion", "lead": "Collections, garments and accessories selected for you." },
+    "tecnologia": { "title": "Technology", "lead": "Explore the latest in gadgets, electronics and accessories." },
+    "deportes": { "title": "Sports", "lead": "Sports equipment and accessories for all levels." },
+    "hogar": { "title": "Home", "lead": "Find furniture, decor and solutions for your home." }
+  },
+  "benefits": { "title": "Why choose us?", "b1h": "Smart recommendations", "b1p": "Our system learns from your tastes and shows you what really matters.", "b2h": "Sell easily and fast", "b2p": "List your products in minutes and reach thousands of potential buyers.", "b3h": "Secure payments", "b3p": "Shop with peace of mind thanks to our protection system and 24/7 support" },
+  "footer": { "ctaTitle": "See personalized recommendations", "ctaButton": "Sign in", "smallCta": "New customer? <a href=\"registro.html\">Start here.</a>", "cols": ["Get to Know Us","Make Money with Us","Payment Products","Let Us Help You"], "helpLinks": ["Your Account","Your Orders","Returns & Replacements","Help"] },
+  "auth": { "register": { "title": "Create account", "lead": "Sign up to buy and sell on J-PLACE", "name": "Full name", "email": "Email address", "password": "Password", "submit": "Sign up" }, "login": { "title": "Sign in", "lead": "Use your email and password to sign in", "email": "Email address", "password": "Password", "submit": "Sign in" } },
+  "misc": { "loadMore": "Load more" }
+}

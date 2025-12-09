@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Registro — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+  <div class="login-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <header class="header login-header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth-page login-main">
+    <section class="auth-card login-card">
+      <div class="login-header-content">
+        <div class="login-icon">✨</div>
+        <h1 data-i18n="auth.register.title">Únete a J-PLACE</h1>
+        <p class="muted" data-i18n="auth.register.lead">Crea tu cuenta para comprar y vender</p>
+      </div>
+
+      <form id="register-form" class="login-form">
+        <div class="form-row input-with-icon">
+          <label for="nombre" data-i18n="auth.register.name">Nombre completo</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input id="nombre" name="nombre" type="text" required placeholder="Juan Pérez" />
+          </div>
+        </div>
+
+        <div class="form-row input-with-icon">
+          <label for="email" data-i18n="auth.register.email">Correo electrónico</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input id="email" name="email" type="email" required placeholder="tu@correo.com" />
+          </div>
+        </div>
+
+        <div class="form-row input-with-icon">
+          <label for="password" data-i18n="auth.register.password">Contraseña</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔑</span>
+            <input id="password" name="password" type="password" minlength="6" required placeholder="Mínimo 6 caracteres" />
+            <button type="button" class="toggle-password" id="toggle-password" title="Mostrar/ocultar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-actions login-actions">
+          <button type="submit" class="btn-primary login-submit" data-i18n="auth.register.submit">
+            <span class="btn-text">Crear cuenta</span>
+            <span class="btn-loader hidden">⏳</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="socials login-socials">
+        <div class="divider"><span>o regístrate con</span></div>
+        <div class="social-buttons">
+          <button class="btn-social google" disabled title="Próximamente"><img src="images/google.svg" alt="Google" class="social-icon"> Google</button>
+          <button class="btn-social facebook" disabled title="Próximamente"><img src="images/facebook.svg" alt="Facebook" class="social-icon"> Facebook</button>
+        </div>
+      </div>
+
+      <p class="small">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+
+      <p id="register-feedback" class="newsletter-feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 MarketPlace Global - Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // Toggle password visibility
+    (function(){
+      const toggleBtn = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password');
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener('click', () => {
+          const type = passwordInput.type === 'password' ? 'text' : 'password';
+          passwordInput.type = type;
+          toggleBtn.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+      }
+    })();
+
+    // Formulario de registro: ahora conecta al backend
+    const form = document.getElementById('register-form');
+    const feedback = document.getElementById('register-feedback');
+    const submitBtn = form.querySelector('.login-submit');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      feedback.textContent = '';
+      const nombre = document.getElementById('nombre').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!nombre || !email || !password) {
+        feedback.style.color = 'crimson';
+        feedback.textContent = 'Por favor completa todos los campos.';
+        return;
+      }
+
+      // Mostrar loader
+      submitBtn.disabled = true;
+      btnText.style.opacity = '0';
+      btnLoader.classList.remove('hidden');
+
+      try {
+        const res = await fetch('http://localhost:4000/api/auth/registro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, email, password }),
+        });
+
+        const data = await res.json();
+        submitBtn.disabled = false;
+        btnText.style.opacity = '1';
+        btnLoader.classList.add('hidden');
+
+        if (res.status === 201) {
+          // Registro exitoso: intentar iniciar sesión automáticamente
+          try {
+            const loginRes = await fetch('http://localhost:4000/api/auth/login', {
+              method: 'POST', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            const loginData = await loginRes.json().catch(()=>({}));
+            if (loginRes.ok && loginData.token) {
+              localStorage.setItem('jplace_token', loginData.token);
+              localStorage.setItem('jplace_user', JSON.stringify(loginData.user || { nombre, email }));
+              feedback.style.color = 'var(--primary-dark)';
+              feedback.textContent = 'Registro correcto. Has iniciado sesión automáticamente.';
+              setTimeout(()=>{ window.location.href = 'index.html'; }, 900);
+              return;
+            }
+          } catch(err) { console.warn('Auto-login falló', err); }
+
+          // Si el auto-login falla, redirigir al login para que ingrese manualmente
+          feedback.style.color = 'var(--primary-dark)';
+          feedback.textContent = data.msg || 'Registro realizado. Ahora puedes iniciar sesión.';
+          setTimeout(() => { window.location.href = 'login.html'; }, 1200);
+          return;
+        }
+
+        // Mostrar mensaje de error recibido
+        feedback.style.color = 'crimson';
+        feedback.textContent = data.msg || 'Error en el registro';
+      } catch (err) {
+        submitBtn.disabled = false;
+        btnText.style.opacity = '1';
+        btnLoader.classList.add('hidden');
+        feedback.style.color = 'crimson';
+        feedback.textContent = 'No fue posible conectar con el servidor.';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

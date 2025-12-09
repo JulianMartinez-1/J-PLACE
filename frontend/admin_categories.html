@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Categorías - J-PLACE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>👑 Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin_dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="admin_users.html" class="nav-item">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+        <a href="admin_products.html" class="nav-item">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Productos Reportados</span>
+        </a>
+        <a href="admin_sellers.html" class="nav-item">
+          <span class="nav-icon">🏪</span>
+          <span class="nav-label">Vendedores</span>
+        </a>
+        <a href="admin_categories.html" class="nav-item active">
+          <span class="nav-icon">🏷️</span>
+          <span class="nav-label">Categorías</span>
+        </a>
+        <a href="admin_commissions.html" class="nav-item">
+          <span class="nav-icon">💰</span>
+          <span class="nav-label">Comisiones</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <div>
+          <h1>🏷️ Gestión de Categorías y Etiquetas</h1>
+          <p class="page-subtitle">Organiza el catálogo de productos del marketplace</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary" onclick="showTagModal()">Añadir Etiqueta</button>
+          <button class="btn-primary" onclick="showCategoryModal()">Crear Categoría</button>
+        </div>
+      </div>
+
+      <!-- Categories Grid -->
+      <section class="categories-section">
+        <h2 class="section-title">Categorías Principales (18)</h2>
+        <div class="categories-grid">
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">💻</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Tecnología</h3>
+            <div class="category-stats">
+              <span>234 productos</span>
+              <span class="text-success">+12 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">👗</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Moda</h3>
+            <div class="category-stats">
+              <span>198 productos</span>
+              <span class="text-success">+8 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">🏠</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Hogar</h3>
+            <div class="category-stats">
+              <span>156 productos</span>
+              <span class="text-success">+5 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">⚽</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Deportes</h3>
+            <div class="category-stats">
+              <span>143 productos</span>
+              <span class="text-success">+3 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">📱</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Electrónica</h3>
+            <div class="category-stats">
+              <span>189 productos</span>
+              <span class="text-success">+7 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+
+          <div class="category-card">
+            <div class="category-header">
+              <span class="category-icon">🧸</span>
+              <button class="btn-icon">⋯</button>
+            </div>
+            <h3 class="category-name">Juguetes</h3>
+            <div class="category-stats">
+              <span>112 productos</span>
+              <span class="text-warning">+2 hoy</span>
+            </div>
+            <div class="category-actions">
+              <button class="btn-ghost-sm">Editar</button>
+              <button class="btn-ghost-sm">Ver productos</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tags Section -->
+      <section class="tags-section">
+        <h2 class="section-title">Etiquetas Populares</h2>
+        <div class="tags-cloud">
+          <span class="tag-item">nuevo <span class="tag-count">234</span></span>
+          <span class="tag-item">oferta <span class="tag-count">189</span></span>
+          <span class="tag-item">premium <span class="tag-count">156</span></span>
+          <span class="tag-item">envío-gratis <span class="tag-count">143</span></span>
+          <span class="tag-item">importado <span class="tag-count">98</span></span>
+          <span class="tag-item">garantía <span class="tag-count">87</span></span>
+          <span class="tag-item">eco-friendly <span class="tag-count">76</span></span>
+          <span class="tag-item">bestseller <span class="tag-count">65</span></span>
+          <span class="tag-item">liquidación <span class="tag-count">54</span></span>
+          <span class="tag-item">artesanal <span class="tag-count">43</span></span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const token = localStorage.getItem('jplace_token');
+    const rawUser = localStorage.getItem('jplace_user');
+    const currentUser = rawUser ? JSON.parse(rawUser) : null;
+    
+    if (!token || !currentUser || currentUser.role !== 'admin') {
+      alert('Acceso denegado.');
+      location.href = 'index.html';
+    }
+
+    function showCategoryModal() {
+      alert('Modal para crear nueva categoría');
+    }
+
+    function showTagModal() {
+      alert('Modal para añadir nueva etiqueta');
+    }
+  </script>
+</body>
+</html>

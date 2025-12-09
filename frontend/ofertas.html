@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ofertas — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    
+    .ofertas-container { 
+      max-width: 1300px; 
+      margin: 2rem auto; 
+      padding: 0 2rem; 
+    }
+    
+    .tabs { 
+      display: flex; 
+      gap: 0; 
+      margin-bottom: 2.5rem; 
+      background: white;
+      border-radius: 16px;
+      padding: 0.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    
+    .tab { 
+      padding: 1.2rem 2.5rem; 
+      font-size: 1.1rem; 
+      font-weight: 700; 
+      cursor: pointer; 
+      border-radius: 12px;
+      transition: all 0.3s ease; 
+      color: #7f8c8d;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .tab:hover { 
+      color: #667eea;
+      background: #f8f9ff;
+    }
+    
+    .tab.active { 
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .ofertas-grid { 
+      display: grid; 
+      gap: 2rem; 
+    }
+    
+    .oferta-card { 
+      background: white; 
+      padding: 2.2rem; 
+      border-radius: 20px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+      display: grid; 
+      grid-template-columns: 140px 1fr auto; 
+      gap: 2rem; 
+      align-items: start;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .oferta-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      transform: translateY(-4px);
+    }
+    
+    .oferta-image { 
+      width: 140px; 
+      height: 140px; 
+      object-fit: cover; 
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .oferta-details { 
+      flex: 1; 
+    }
+    
+    .oferta-product { 
+      font-size: 1.4rem; 
+      font-weight: 700; 
+      color: #2c3e50; 
+      margin-bottom: 0.8rem; 
+    }
+    
+    .oferta-info { 
+      display: flex; 
+      gap: 2.5rem; 
+      margin: 1rem 0; 
+    }
+    
+    .oferta-info-item { 
+      display: flex; 
+      flex-direction: column; 
+    }
+    
+    .oferta-info-label { 
+      font-size: 0.85rem; 
+      color: #7f8c8d; 
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .oferta-info-value { 
+      font-size: 1.3rem; 
+      font-weight: 700; 
+      color: #27ae60; 
+    }
+    
+    .oferta-message { 
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+      padding: 1rem 1.3rem; 
+      border-radius: 12px; 
+      margin-top: 1rem; 
+      font-style: italic; 
+      color: #495057;
+      border-left: 4px solid #667eea;
+    }
+    
+    .oferta-status { 
+      display: inline-block; 
+      padding: 0.5rem 1.2rem; 
+      border-radius: 25px; 
+      font-size: 0.85rem; 
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .status-pendiente { 
+      background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); 
+      color: #856404; 
+    }
+    
+    .status-aceptada { 
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); 
+      color: #155724; 
+    }
+    
+    .status-rechazada { 
+      background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%); 
+      color: #721c24; 
+    }
+    
+    .status-contraoferta { 
+      background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); 
+      color: #0c5460; 
+    }
+    
+    .status-cancelada { 
+      background: linear-gradient(135deg, #e2e3e5 0%, #d6d8db 100%); 
+      color: #383d41; 
+    }
+    
+    .oferta-actions { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.9rem; 
+    }
+    
+    .btn-action { 
+      padding: 0.9rem 1.8rem; 
+      border: none; 
+      border-radius: 12px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-accept { 
+      background: linear-gradient(135deg, #27ae60 0%, #229954 100%); 
+      color: white; 
+    }
+    
+    .btn-accept:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+    }
+    
+    .btn-reject { 
+      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); 
+      color: white; 
+    }
+    
+    .btn-reject:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+    }
+    
+    .btn-counter { 
+      background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); 
+      color: white; 
+    }
+    
+    .btn-counter:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+    }
+    
+    .btn-cancel { 
+      background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%); 
+      color: white; 
+    }
+    
+    .btn-cancel:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+    }
+    
+    .empty-state { 
+      text-align: center; 
+      padding: 5rem 2rem; 
+      color: #95a5a6;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    .empty-state-icon { 
+      font-size: 6rem; 
+      margin-bottom: 1.5rem; 
+    }
+    
+    .negotiation-history { 
+      margin-top: 1.2rem; 
+      padding-top: 1.2rem; 
+      border-top: 2px solid #f0f0f0; 
+    }
+    
+    .history-item { 
+      padding: 0.8rem 1rem; 
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+      border-left: 4px solid #667eea; 
+      margin-bottom: 0.6rem; 
+      font-size: 0.9rem;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .oferta-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .oferta-image {
+        width: 100%;
+        height: 200px;
+      }
+      
+      .oferta-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="ofertas-container">
+    <h1 style="font-size: 2.8rem; color: #2c3e50; margin-bottom: 2.5rem; font-weight: 800;">
+      <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💰 Mis Ofertas</span>
+    </h1>
+    
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('enviadas')">Ofertas Enviadas</div>
+      <div class="tab" onclick="switchTab('recibidas')">Ofertas Recibidas</div>
+    </div>
+
+    <div id="ofertas-enviadas" class="ofertas-grid"></div>
+    <div id="ofertas-recibidas" class="ofertas-grid" style="display: none;"></div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    let ofertasEnviadas = [];
+    let ofertasRecibidas = [];
+
+    async function loadOfertas() {
+      try {
+        const [enviadasRes, recibidasRes] = await Promise.all([
+          fetch('http://localhost:4000/api/ofertas?tipo=enviadas'),
+          fetch('http://localhost:4000/api/ofertas?tipo=recibidas')
+        ]);
+
+        if (enviadasRes.ok) {
+          const data = await enviadasRes.json();
+          ofertasEnviadas = data.ofertas || [];
+        }
+
+        if (recibidasRes.ok) {
+          const data = await recibidasRes.json();
+          ofertasRecibidas = data.ofertas || [];
+        }
+
+        renderOfertas('enviadas');
+        renderOfertas('recibidas');
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function renderOfertas(tipo) {
+      const ofertas = tipo === 'enviadas' ? ofertasEnviadas : ofertasRecibidas;
+      const container = document.getElementById(`ofertas-${tipo}`);
+
+      if (ofertas.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <p>No tienes ofertas ${tipo}</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = ofertas.map(oferta => {
+        const producto = oferta.producto || {};
+        const imagePath = producto.imagenes && producto.imagenes[0] 
+          ? `http://localhost:4000/${producto.imagenes[0].replace(/\\/g, '/')}`
+          : 'images/placeholder.png';
+
+        return `
+          <div class="oferta-card">
+            <img src="${imagePath}" alt="${producto.nombre}" class="oferta-image" onerror="this.src='images/placeholder.png'">
+            
+            <div class="oferta-details">
+              <div class="oferta-product">${producto.nombre || 'Producto'}</div>
+              <span class="oferta-status status-${oferta.estado}">${getStatusText(oferta.estado)}</span>
+              
+              <div class="oferta-info">
+                <div class="oferta-info-item">
+                  <span class="oferta-info-label">Precio Original</span>
+                  <span class="oferta-info-value" style="color: #7f8c8d; text-decoration: line-through;">$${producto.precio?.toFixed(2)}</span>
+                </div>
+                <div class="oferta-info-item">
+                  <span class="oferta-info-label">Tu Oferta</span>
+                  <span class="oferta-info-value">$${oferta.monto?.toFixed(2)}</span>
+                </div>
+                ${oferta.contraofertaMonto ? `
+                  <div class="oferta-info-item">
+                    <span class="oferta-info-label">Contraoferta</span>
+                    <span class="oferta-info-value" style="color: #3498db;">$${oferta.contraofertaMonto.toFixed(2)}</span>
+                  </div>
+                ` : ''}
+              </div>
+
+              ${oferta.mensaje ? `<div class="oferta-message">💬 "${oferta.mensaje}"</div>` : ''}
+              ${oferta.respuesta ? `<div class="oferta-message" style="background: #e8f0fe;">✉️ Respuesta: "${oferta.respuesta}"</div>` : ''}
+
+              ${oferta.historialNegociacion && oferta.historialNegociacion.length > 0 ? `
+                <div class="negotiation-history">
+                  <strong>Historial de Negociación:</strong>
+                  ${oferta.historialNegociacion.map(h => `
+                    <div class="history-item">
+                      ${h.accion} - $${h.monto.toFixed(2)} - ${new Date(h.fecha).toLocaleDateString('es-MX')}
+                    </div>
+                  `).join('')}
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="oferta-actions">
+              ${renderActions(oferta, tipo)}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderActions(oferta, tipo) {
+      if (tipo === 'recibidas' && oferta.estado === 'pendiente') {
+        return `
+          <button class="btn-action btn-accept" onclick="responderOferta('${oferta._id}', 'aceptada')">✓ Aceptar</button>
+          <button class="btn-action btn-counter" onclick="contraoferta('${oferta._id}')">↔️ Contraofertar</button>
+          <button class="btn-action btn-reject" onclick="responderOferta('${oferta._id}', 'rechazada')">✗ Rechazar</button>
+        `;
+      }
+
+      if (tipo === 'recibidas' && oferta.estado === 'contraoferta') {
+        return `
+          <button class="btn-action btn-accept" onclick="responderOferta('${oferta._id}', 'aceptada')">✓ Aceptar Contraoferta</button>
+          <button class="btn-action btn-reject" onclick="responderOferta('${oferta._id}', 'rechazada')">✗ Rechazar</button>
+        `;
+      }
+
+      if (tipo === 'enviadas' && oferta.estado === 'contraoferta') {
+        return `
+          <button class="btn-action btn-accept" onclick="aceptarContraoferta('${oferta._id}')">✓ Aceptar</button>
+          <button class="btn-action btn-reject" onclick="rechazarContraoferta('${oferta._id}')">✗ Rechazar</button>
+        `;
+      }
+
+      if (tipo === 'enviadas' && oferta.estado === 'pendiente') {
+        return `<button class="btn-action btn-cancel" onclick="cancelarOferta('${oferta._id}')">Cancelar Oferta</button>`;
+      }
+
+      return '';
+    }
+
+    async function responderOferta(ofertaId, respuesta) {
+      let monto = null;
+      let mensaje = null;
+
+      if (respuesta === 'contraoferta') {
+        const montoInput = prompt('Ingresa tu contraoferta:');
+        if (!montoInput) return;
+        monto = parseFloat(montoInput);
+        mensaje = prompt('Mensaje opcional:') || '';
+      } else if (respuesta === 'rechazada') {
+        mensaje = prompt('¿Quieres agregar un mensaje? (opcional)') || '';
+      }
+
+      try {
+        const response = await fetch(`http://localhost:4000/api/ofertas/${ofertaId}/responder`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ respuesta, contraofertaMonto: monto, mensajeRespuesta: mensaje })
+        });
+
+        if (!response.ok) throw new Error('Error al responder oferta');
+        
+        alert('Respuesta enviada correctamente');
+        await loadOfertas();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al responder la oferta');
+      }
+    }
+
+    async function contraoferta(ofertaId) {
+      await responderOferta(ofertaId, 'contraoferta');
+    }
+
+    async function aceptarContraoferta(ofertaId) {
+      if (!confirm('¿Aceptar la contraoferta?')) return;
+      await responderOferta(ofertaId, 'aceptada');
+    }
+
+    async function rechazarContraoferta(ofertaId) {
+      if (!confirm('¿Rechazar la contraoferta?')) return;
+      await responderOferta(ofertaId, 'rechazada');
+    }
+
+    async function cancelarOferta(ofertaId) {
+      if (!confirm('¿Estás seguro de cancelar esta oferta?')) return;
+
+      try {
+        const response = await fetch(`http://localhost:4000/api/ofertas/${ofertaId}`, {
+          method: 'DELETE'
+        });
+
+        if (!response.ok) throw new Error('Error al cancelar oferta');
+        
+        alert('Oferta cancelada');
+        await loadOfertas();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al cancelar la oferta');
+      }
+    }
+
+    function switchTab(tipo) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      
+      document.getElementById('ofertas-enviadas').style.display = tipo === 'enviadas' ? 'grid' : 'none';
+      document.getElementById('ofertas-recibidas').style.display = tipo === 'recibidas' ? 'grid' : 'none';
+    }
+
+    function getStatusText(estado) {
+      const texts = {
+        'pendiente': 'Pendiente',
+        'aceptada': 'Aceptada',
+        'rechazada': 'Rechazada',
+        'contraoferta': 'Contraoferta',
+        'cancelada': 'Cancelada'
+      };
+      return texts[estado] || estado;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadOfertas);
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Categoría — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png" type="image/png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="index.html#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="index.html#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+    </nav>
+  </header>
+
+  <section class="category-hero" data-category="" style="background-image: url('images/TECNOLOGIA.jpg');">
+    <div class="hero-inner">
+      <h1>Categoría</h1>
+      <p>Explora los productos disponibles.</p>
+    </div>
+  </section>
+
+  <div class="filters">
+    <button class="filter-btn">Más populares</button>
+    <button class="filter-btn">Precio: bajo → alto</button>
+    <button class="filter-btn">Nuevos</button>
+  </div>
+
+  <section class="products-grid" aria-label="Productos de la categoría">
+    <!-- Contenido de ejemplo que puede ser reemplazado por la llamada a la API -->
+    <div class="product-placeholder">
+      <p>Cargando productos...</p>
+    </div>
+  </section>
+
+  <div style="text-align:center; padding:1rem 0;">
+    <button class="load-more" data-i18n="misc.loadMore">Cargar más</button>
+  </div>
+
+  <div id="footer-include"></div>
+  <script>
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const rawCat = (params.get('category') || '').toLowerCase();
+    const map = {
+      tecnologia: {title: 'Tecnología', lead: 'Explora lo último en gadgets, electrónica y accesorios.', img: 'images/TECNOLOGIA.jpg'},
+      moda: {title: 'Moda', lead: 'Encuentra prendas y accesorios para todos los estilos.', img: 'images/moda-para-hombre-prendas-calzado-ropa-complementos-accesorios-4.jpg'},
+      hogar: {title: 'Hogar', lead: 'Artículos para decorar y equipar tu casa.', img: 'images/images.jpg'},
+      deportes: {title: 'Deportes', lead: 'Equipamiento y ropa deportiva.', img: 'images/deportes.jpg'},
+      electronica: {title: 'Electrónica', lead: 'Dispositivos y accesorios electrónicos.', img: 'images/54TDYNQK7ZIXZGIWJ7ICAV4U4E.jpg'},
+      juguetes: {title: 'Juguetes', lead: 'Juguetes y juegos para todas las edades.', img: 'images/moda-para-hombre-prendas-calzado-ropa-complementos-accesorios-4.jpg'},
+      herramientas: {title: 'Herramientas', lead: 'Herramientas y útiles para el trabajo y bricolaje.', img: 'images/images.jpg'},
+      libros: {title: 'Libros', lead: 'Lectura y material educativo.', img: 'images/deportes.jpg'},
+      electrodomesticos: {title: 'Electrodomésticos', lead: 'Electrodomésticos y artículos para el hogar.', img: 'images/electrodomesticos.jpg'},
+      belleza: {title: 'Belleza', lead: 'Productos de belleza y cuidado personal.', img: 'images/belleza.jpg'}
+    };
+
+    const cat = map[rawCat] ? rawCat : 'general';
+    const meta = map[rawCat] || {title: (rawCat || 'Categoría').replace(/(^.|-.)/g, s=>s.toUpperCase()), lead: 'Explora los productos disponibles.', img: 'images/TECNOLOGIA.jpg'};
+
+    document.title = `${meta.title} — J-PLACE`;
+    const hero = document.querySelector('.category-hero');
+    if (hero) {
+      hero.style.backgroundImage = `url('${meta.img}')`;
+      hero.querySelector('h1').textContent = meta.title;
+      hero.querySelector('p').textContent = meta.lead;
+    }
+
+    // Intentamos cargar productos desde la API; si falla, mostramos un fallback estático.
+    const grid = document.querySelector('.products-grid');
+    function renderProducts(list){
+      if (!grid) return;
+      grid.innerHTML = '';
+      if (!list || !list.length) {
+        grid.innerHTML = '<p>No hay productos para esta categoría.</p>';
+        return;
+      }
+      for (const p of list) {
+        const a = document.createElement('a');
+        a.className = 'product-card';
+        a.href = `producto.html?id=${encodeURIComponent(p._id||p.id||'')}`;
+        a.innerHTML = `
+          <img src="${(p.images && p.images[0]) || 'images/placeholder.jpg'}" alt="${p.name || p.title || 'Producto'}" />
+          <div class="card-body">
+            <h4>${p.name || p.title || ''}</h4>
+            <p>${p.description ? (p.description.substring(0,100)) : ''}</p>
+            <div class="price">${p.price ? ('$' + Number(p.price).toFixed(2)) : ''}</div>
+          </div>`;
+        grid.appendChild(a);
+      }
+    }
+
+    // Try fetch from backend API (use backend origin so static server doesn't return 404)
+    const BACKEND_ORIGIN = (window.__JPLACE_BACKEND_URL__ || 'http://localhost:4000');
+    if (rawCat) {
+      fetch(`${BACKEND_ORIGIN}/api/productos?category=${encodeURIComponent(rawCat)}`)
+        .then(r=>r.ok? r.json() : Promise.reject(r.status))
+        .then(data=>{
+          if (Array.isArray(data) && data.length) renderProducts(data);
+          else {
+            // fallback sample cards
+            document.querySelector('.products-grid').innerHTML = document.querySelector('.products-grid').innerHTML || '<p>No hay productos para esta categoría.</p>';
+          }
+        })
+        .catch(err=>{
+          // no-op: keep fallback content if any
+          console.warn('No se pudieron cargar productos:', err);
+          if (grid && grid.innerHTML.trim()==='') grid.innerHTML = '<p>No se pudieron cargar los productos desde el backend. Asegúrate de que el servidor backend esté corriendo en <code>http://localhost:4000</code>.</p>';
+        });
+    } else {
+      // si no hay categoría, mostrar mensaje
+      if (grid) grid.innerHTML = '<p>Selecciona una categoría para ver productos.</p>';
+    }
+  })();
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>

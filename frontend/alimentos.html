@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alimentos — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="index.html#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="index.html#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <a href="cart.html" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:inline-flex;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <nav class="breadcrumbs" style="padding:1rem 2rem;background:#f8f9fa;font-size:0.9rem">
+    <a href="index.html" style="color:#666;text-decoration:none">🏠 Inicio</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <a href="index.html#productos" style="color:#666;text-decoration:none">Productos</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <span style="color:#27ae60;font-weight:600">Alimentos</span>
+  </nav>
+
+  <section class="category-hero alimentos-hero" data-category="alimentos" style="background-image: linear-gradient(135deg, rgba(39,174,96,0.9), rgba(46,204,113,0.85)), url('images/alimentos\ flayer.jpg');background-size:cover;background-position:center;min-height:350px;display:flex;align-items:center;position:relative;overflow:hidden">
+    <div class="hero-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);z-index:1"></div>
+    <div class="hero-inner" style="position:relative;z-index:2;color:white;text-align:center;max-width:900px;margin:0 auto;padding:2rem">
+      <span class="hero-badge" style="display:inline-block;background:rgba(255,255,255,0.2);padding:0.5rem 1.5rem;border-radius:50px;font-size:0.9rem;margin-bottom:1rem;backdrop-filter:blur(10px)">🥗 Alimentos & Bebidas</span>
+      <h1 style="font-size:3rem;margin:1rem 0;text-shadow:0 2px 10px rgba(0,0,0,0.3)">Alimentos</h1>
+      <p style="font-size:1.2rem;margin-bottom:2rem;opacity:0.95">Productos frescos, orgánicos y gourmet para tu cocina</p>
+      <div class="hero-stats" style="display:flex;justify-content:center;gap:3rem;margin-top:2rem">
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">720+</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Productos</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">4.9⭐</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Calificación</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">100%</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Frescura</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subcategories-section" style="padding:3rem 2rem;background:#f8f9fa">
+    <h2 style="text-align:center;margin-bottom:2rem;font-size:2rem;color:#333">🥗 Explora por Categoría</h2>
+    <div class="subcategories-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto">
+      <a href="#organicos" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🥬</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#27ae60">Orgánicos</h3>
+        <span style="font-size:0.9rem;color:#666">289 productos</span>
+      </a>
+      <a href="#despensa" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🫙</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#27ae60">Despensa</h3>
+        <span style="font-size:0.9rem;color:#666">234 productos</span>
+      </a>
+      <a href="#bebidas" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🥤</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#27ae60">Bebidas</h3>
+        <span style="font-size:0.9rem;color:#666">123 productos</span>
+      </a>
+      <a href="#gourmet" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🍾</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#27ae60">Gourmet</h3>
+        <span style="font-size:0.9rem;color:#666">74 productos</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="filters-enhanced" style="padding:2rem;background:white;border-bottom:1px solid #eee;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;justify-content:center;max-width:1400px;margin:0 auto">
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">🔍 Buscar:</label>
+      <input type="search" placeholder="Verduras, frutas..." class="filter-search" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;width:200px;font-size:0.95rem">
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Ordenar:</label>
+      <select class="filter-select" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;background:white;cursor:pointer">
+        <option>⭐ Más populares</option>
+        <option>💰 Menor precio</option>
+        <option>💎 Mayor precio</option>
+        <option>🆕 Más recientes</option>
+      </select>
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Rango de precio:</label>
+      <div class="price-range" style="display:flex;align-items:center;gap:0.5rem">
+        <input type="number" placeholder="$0" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+        <span style="color:#999">—</span>
+        <input type="number" placeholder="$400" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+      </div>
+    </div>
+  </div>
+
+  <section class="products-grid" aria-label="Productos de alimentos">
+    <a class="product-card" href="#" data-subcategory="organicos">
+      <img src="images/alimentos.avif" alt="Alimentos orgánicos" />
+      <div class="card-body">
+        <h4>Pack de Alimentos Orgánicos</h4>
+        <p>Selección premium de vegetales y frutas orgánicas frescas.</p>
+        <div class="price">$49.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="cuna">
+      <img src="images/bebes.avif" alt="Cuna convertible" />
+      <div class="card-body">
+        <h4>Cuna Convertible 3 en 1</h4>
+        <p>Cuna que se transforma en cama infantil, crece con tu hijo.</p>
+        <div class="price">$349.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="carriola">
+      <img src="images/bebes.avif" alt="Carriola" />
+      <div class="card-body">
+        <h4>Carriola Ultraligera</h4>
+        <p>Plegable, compacta y fácil de maniobrar con sistema de seguridad.</p>
+        <div class="price">$279.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="juguetes">
+      <img src="images/bebes.avif" alt="Móvil musical" />
+      <div class="card-body">
+        <h4>Móvil Musical para Cuna</h4>
+        <p>Con luces y melodías relajantes para ayudar a dormir al bebé.</p>
+        <div class="price">$59.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="alimentacion">
+      <img src="images/bebes.avif" alt="Set de alimentación" />
+      <div class="card-body">
+        <h4>Set de Alimentación Completo</h4>
+        <p>Incluye biberones, tetinas, platos y cubiertos aptos para bebé.</p>
+        <div class="price">$44.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="higiene">
+      <img src="images/bebes.avif" alt="Bañera plegable" />
+      <div class="card-body">
+        <h4>Bañera Plegable con Termómetro</h4>
+        <p>Compacta, segura y con indicador de temperatura del agua.</p>
+        <div class="price">$64.00</div>
+      </div>
+    </a>
+  </section>
+
+  <div style="text-align:center; padding:1rem 0;">
+    <button class="load-more" data-i18n="misc.loadMore">Cargar más</button>
+  </div>
+
+  <div id="footer-include"></div>
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

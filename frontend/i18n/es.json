@@ -1,0 +1,19 @@
+{
+  "nav": { "inicio": "Inicio", "productos": "Productos", "beneficios": "Beneficios", "contacto": "Contacto", "register": "Regístrate" },
+  "hero": { "title": "Compra y vende con confianza", "lead": "Encuentra productos únicos y recomendaciones personalizadas. Publica tus artículos en minutos y llega a compradores reales.", "explore": "Explorar categorías", "register": "Regístrate" },
+  "trust": { "t1": "🚚 Envíos rápidos", "t2": "🔒 Pagos seguros", "t3": "⭐ Atención 24/7" },
+  "testimonials": { "title": "Lo que dicen nuestros usuarios", "t1": "Encontré un teléfono en perfecto estado por un precio increíble. El proceso fue rápido y el vendedor muy amable.", "a1": "- María, Bogotá", "t2": "Vender mis muebles aquí fue sencillo. Las herramientas de publicación son claras y recibí ofertas en horas.", "a2": "- Andrés, Medellín", "t3": "La atención al cliente me ayudó con una devolución. Excelente soporte y experiencia segura.", "a3": "- Camila, Cali" },
+  "newsletter": { "title": "Recibe ofertas exclusivas", "p": "Suscríbete a nuestro boletín y recibe un 10% de descuento en tu primera compra.", "placeholder": "tu@correo.com", "btn": "Suscribirse", "thankyou": "¡Gracias! Te hemos enviado un correo de confirmación (simulado)." },
+  "productos": { "title": "Explora categorías populares" },
+  "productos_extra": { "deportes": "Deportes" },
+  "category": {
+    "moda": { "title": "Moda", "lead": "Colecciones, prendas y accesorios seleccionados para ti." },
+    "tecnologia": { "title": "Tecnología", "lead": "Explora lo último en gadgets, electrónica y accesorios." },
+    "deportes": { "title": "Deportes", "lead": "Equipamiento deportivo y accesorios para todos los niveles." },
+    "hogar": { "title": "Hogar", "lead": "Encuentra muebles, decoración y soluciones para tu casa." }
+  },
+  "benefits": { "title": "¿Por qué elegirnos?", "b1h": "🧠 Recomendaciones inteligentes", "b1p": "Nuestro sistema aprende de tus gustos y te muestra lo que realmente te interesa.", "b2h": "🚀 Vende fácil y rápido", "b2p": "Publica tus productos en minutos y llega a miles de compradores potenciales.", "b3h": "💳 Pagos seguros", "b3p": "Compra con tranquilidad gracias a nuestro sistema de protección y soporte 24/7" },
+  "footer": { "ctaTitle": "Ver recomendaciones personalizadas", "ctaButton": "Identifícate", "smallCta": "¿Eres un cliente nuevo? <a href=\"registro.html\">Empieza aquí.</a>", "cols": ["Conócenos","Gana Dinero con Nosotros","Productos de Pago","Podemos Ayudarte"], "helpLinks": ["Tu Cuenta","Tus Pedidos","Devoluciones","Ayuda"] },
+  "auth": { "register": { "title": "Crear cuenta", "lead": "Regístrate para comprar y vender en J-PLACE", "name": "Nombre completo", "email": "Correo electrónico", "password": "Contraseña", "submit": "Regístrate" }, "login": { "title": "Inicia sesión", "lead": "Usa tu correo y contraseña para iniciar sesión", "email": "Correo electrónico", "password": "Contraseña", "submit": "Iniciar sesión" } },
+  "misc": { "loadMore": "Cargar más" }
+}

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Checkout — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    
+    .checkout-container { 
+      max-width: 1300px; 
+      margin: 2rem auto; 
+      padding: 0 2rem; 
+    }
+    
+    .checkout-layout { 
+      display: grid; 
+      grid-template-columns: 1fr 450px; 
+      gap: 2.5rem; 
+    }
+    
+    .checkout-section { 
+      background: white; 
+      padding: 2.5rem; 
+      border-radius: 20px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+      margin-bottom: 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .checkout-section:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    
+    .checkout-section h2 { 
+      font-size: 1.6rem; 
+      margin-bottom: 1.8rem; 
+      color: #2c3e50;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .form-row { 
+      margin-bottom: 1.5rem; 
+    }
+    
+    .form-row label { 
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem; 
+      font-weight: 700; 
+      color: #2c3e50;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+    }
+    
+    .form-row input, .form-row select { 
+      width: 100%; 
+      padding: 1.2rem 1.5rem; 
+      border: 2px solid #e0e0e0; 
+      border-radius: 14px; 
+      font-size: 1.05rem;
+      transition: all 0.3s ease;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      font-weight: 500;
+    }
+
+    .form-row input::placeholder {
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    .form-row input:hover {
+      border-color: #c0c0c0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .form-row input:focus, .form-row select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 16px rgba(102, 126, 234, 0.2);
+      transform: translateY(-2px);
+    }
+
+    textarea {
+      transition: all 0.3s ease;
+    }
+
+    textarea::placeholder {
+      color: #aaa;
+      font-weight: 400;
+    }
+
+    textarea:hover {
+      border-color: #c0c0c0 !important;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+    }
+
+    textarea:focus {
+      outline: none !important;
+      border-color: #667eea !important;
+      background: white !important;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 16px rgba(102, 126, 234, 0.2) !important;
+      transform: translateY(-2px);
+    }
+    
+    .form-row-split { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 1.2rem; 
+    }
+    
+    .payment-methods { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 1.5rem; 
+      margin-top: 2rem; 
+    }
+    
+    .payment-method { 
+      border: 2px solid transparent;
+      padding: 2rem 1.5rem; 
+      border-radius: 20px; 
+      cursor: pointer; 
+      text-align: center; 
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payment-method::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .payment-method > * {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .payment-method:hover { 
+      border-color: #667eea;
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.25);
+    }
+
+    .payment-method:hover::before {
+      opacity: 0.03;
+    }
+    
+    .payment-method.selected { 
+      border-color: #667eea; 
+      background: linear-gradient(145deg, #f0f4ff 0%, #e8efff 100%);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35), 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: scale(1.03);
+    }
+
+    .payment-method.selected::before {
+      opacity: 0.08;
+    }
+
+    .payment-method.selected .payment-method-icon {
+      transform: scale(1.15);
+      filter: drop-shadow(0 4px 8px rgba(102, 126, 234, 0.3));
+    }
+
+    .payment-method.selected .payment-method-name {
+      color: #667eea;
+    }
+    
+    .payment-method-icon { 
+      font-size: 3.5rem; 
+      margin-bottom: 1rem;
+      display: block;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+    }
+    
+    .payment-method-name { 
+      font-weight: 700; 
+      color: #2c3e50;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+    }
+    
+    .order-summary { 
+      background: white; 
+      padding: 2.5rem; 
+      border-radius: 20px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+      position: sticky; 
+      top: 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .summary-row { 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 1rem 0; 
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 1.05rem;
+    }
+    
+    .summary-row.total { 
+      font-size: 1.5rem; 
+      font-weight: 800; 
+      color: #667eea; 
+      border-top: 3px solid #667eea; 
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-bottom: none;
+    }
+    
+    .btn-place-order { 
+      width: 100%; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: white; 
+      padding: 1.4rem; 
+      border: none; 
+      border-radius: 14px; 
+      font-size: 1.15rem; 
+      font-weight: 700; 
+      cursor: pointer; 
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .btn-place-order:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-place-order:active {
+      transform: translateY(-1px);
+    }
+
+    #payment-details {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 2px solid #e8e8e8;
+    }
+
+    #payment-details .form-row input {
+      background: white;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border: 2px solid #e8e8e8;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+    
+    @media (max-width: 768px) { 
+      .checkout-layout { 
+        grid-template-columns: 1fr; 
+      }
+      
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-container {
+        padding: 0 1rem;
+      }
+
+      .checkout-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="checkout-container">
+    <h1 style="font-size: 2.8rem; color: #2c3e50; margin-bottom: 2.5rem; font-weight: 800; display: flex; align-items: center; gap: 1rem;">
+      <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛍️ Finalizar Compra</span>
+    </h1>
+    
+    <div class="checkout-layout">
+      <div>
+        <!-- Dirección de Envío -->
+        <div class="checkout-section">
+          <h2 style="display: flex; align-items: center; gap: 0.8rem; font-size: 1.8rem; margin-bottom: 0.5rem; color: #2c3e50;">
+            <span style="font-size: 2rem;">📦</span> Dirección de Envío
+          </h2>
+          <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 500;">Completa los datos de entrega</p>
+          <div class="form-row">
+            <label>👤 Nombre Completo *</label>
+            <input type="text" id="nombreCompleto" placeholder="Ingresa tu nombre completo" required>
+          </div>
+          <div class="form-row">
+            <label>🏠 Dirección *</label>
+            <input type="text" id="direccion" placeholder="Calle, número, colonia" required>
+          </div>
+          <div class="form-row-split">
+            <div>
+              <label>🏙️ Ciudad *</label>
+              <input type="text" id="ciudad" placeholder="Ej: Ciudad de México" required>
+            </div>
+            <div>
+              <label>📍 Estado *</label>
+              <input type="text" id="estado" placeholder="Ej: CDMX" required>
+            </div>
+          </div>
+          <div class="form-row-split">
+            <div>
+              <label>📮 Código Postal *</label>
+              <input type="text" id="codigoPostal" placeholder="00000" maxlength="5" pattern="[0-9]{5}" required>
+            </div>
+            <div>
+              <label>📱 Teléfono *</label>
+              <input type="tel" id="telefono" placeholder="(55) 1234-5678" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Método de Pago -->
+        <div class="checkout-section">
+          <h2 style="display: flex; align-items: center; gap: 0.8rem; font-size: 1.8rem; margin-bottom: 0.5rem; color: #2c3e50;">
+            <span style="font-size: 2rem;">💳</span> Método de Pago
+          </h2>
+          <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 500;">Selecciona tu forma de pago preferida</p>
+          <div class="payment-methods">
+            <div class="payment-method" onclick="selectPaymentMethod('tarjeta')">
+              <div class="payment-method-icon">💳</div>
+              <div class="payment-method-name">Tarjeta</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('paypal')">
+              <div class="payment-method-icon">🅿️</div>
+              <div class="payment-method-name">PayPal</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('transferencia')">
+              <div class="payment-method-icon">🏦</div>
+              <div class="payment-method-name">Transferencia</div>
+            </div>
+            <div class="payment-method" onclick="selectPaymentMethod('efectivo')">
+              <div class="payment-method-icon">💵</div>
+              <div class="payment-method-name">Efectivo</div>
+            </div>
+          </div>
+          
+          <div id="payment-details" style="margin-top: 1.5rem; display: none;">
+            <!-- Detalles de pago aparecerán aquí según el método seleccionado -->
+          </div>
+        </div>
+
+        <!-- Notas Especiales -->
+        <div class="checkout-section">
+          <h2 style="display: flex; align-items: center; gap: 0.8rem; font-size: 1.8rem; margin-bottom: 0.5rem; color: #2c3e50;">
+            <span style="font-size: 2rem;">📝</span> Notas Especiales (Opcional)
+          </h2>
+          <p style="color: #7f8c8d; font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 500;">Instrucciones adicionales para tu pedido</p>
+          <textarea id="notasEspeciales" rows="4" placeholder="Ej: Dejar en la puerta, llamar antes de entregar, instrucciones especiales..." style="width: 100%; padding: 1.2rem 1.5rem; border: 2px solid #e0e0e0; border-radius: 14px; font-size: 1.05rem; font-family: inherit; resize: vertical; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.04);"></textarea>
+        </div>
+      </div>
+
+      <!-- Resumen del Pedido -->
+      <div>
+        <div class="order-summary">
+          <h2 style="margin-bottom: 0.5rem; font-size: 1.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.8rem; color: #2c3e50;">
+            <span style="font-size: 2rem;">📋</span> Resumen del Pedido
+          </h2>
+          <p style="color: #7f8c8d; font-size: 0.9rem; margin-bottom: 1.8rem; font-weight: 500;">Revisa los productos antes de confirmar</p>
+          <div id="order-items"></div>
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span id="summary-subtotal">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>IVA (16%):</span>
+            <span id="summary-tax">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Envío:</span>
+            <span id="summary-shipping">$0.00</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span id="summary-total">$0.00</span>
+          </div>
+          <button class="btn-place-order" onclick="placeOrder()">Realizar Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+  <script>
+    let selectedPayment = null;
+    let cartData = null;
+
+    async function loadCheckout() {
+      try {
+        cartData = await getCart();
+        if (!cartData.items || cartData.items.length === 0) {
+          alert('Tu carrito está vacío');
+          window.location.href = 'cart.html';
+          return;
+        }
+
+        const itemsContainer = document.getElementById('order-items');
+        itemsContainer.innerHTML = cartData.items.map(item => `
+          <div style="display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid #ecf0f1;">
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">${item.producto?.nombre || 'Producto'}</div>
+              <div style="font-size: 0.9rem; color: #7f8c8d;">Cant: ${item.cantidad}</div>
+            </div>
+            <div style="font-weight: 600; color: #27ae60;">$${(item.precio * item.cantidad).toFixed(2)}</div>
+          </div>
+        `).join('');
+
+        updateSummary();
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al cargar el checkout');
+        window.location.href = 'cart.html';
+      }
+    }
+
+    function updateSummary() {
+      const subtotal = cartData.total || 0;
+      const tax = subtotal * 0.16;
+      const shipping = 100;
+      const total = subtotal + tax + shipping;
+
+      document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('summary-shipping').textContent = `$${shipping.toFixed(2)}`;
+      document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPayment = method;
+      document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      
+      const detailsDiv = document.getElementById('payment-details');
+      detailsDiv.style.display = 'block';
+      
+      if (method === 'tarjeta') {
+        detailsDiv.innerHTML = `
+          <div class="form-row">
+            <label>Número de Tarjeta</label>
+            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+          </div>
+          <div class="form-row-split">
+            <div><label>Vencimiento</label><input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5"></div>
+            <div><label>CVV</label><input type="text" id="cardCVV" placeholder="123" maxlength="3"></div>
+          </div>
+        `;
+      } else {
+        detailsDiv.innerHTML = `<p style="color: #7f8c8d; margin: 0;">Serás redirigido para completar el pago.</p>`;
+      }
+    }
+
+    async function placeOrder() {
+      if (!selectedPayment) {
+        alert('Por favor selecciona un método de pago');
+        return;
+      }
+
+      const direccionEnvio = {
+        nombreCompleto: document.getElementById('nombreCompleto').value,
+        direccion: document.getElementById('direccion').value,
+        ciudad: document.getElementById('ciudad').value,
+        estado: document.getElementById('estado').value,
+        codigoPostal: document.getElementById('codigoPostal').value,
+        telefono: document.getElementById('telefono').value
+      };
+
+      if (!direccionEnvio.nombreCompleto || !direccionEnvio.direccion || !direccionEnvio.ciudad || !direccionEnvio.estado || !direccionEnvio.codigoPostal || !direccionEnvio.telefono) {
+        alert('Por favor completa todos los campos de dirección');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:4000/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            direccionEnvio,
+            metodoPago: { tipo: selectedPayment },
+            notasEspeciales: document.getElementById('notasEspeciales').value
+          })
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.msg || 'Error al procesar el pedido');
+        }
+
+        const data = await response.json();
+        alert('¡Pedido realizado exitosamente! ID: ' + data.pedido._id);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error('Error:', error);
+        alert(error.message || 'Error al procesar el pedido');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCheckout);
+  </script>
+</body>
+</html>

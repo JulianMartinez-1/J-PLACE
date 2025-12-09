@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Mensajes — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * { box-sizing: border-box; }
+    
+    .mensajes-container { 
+      max-width: 1500px; 
+      margin: 2rem auto; 
+      padding: 0 2rem; 
+    }
+    
+    .mensajes-layout { 
+      display: grid; 
+      grid-template-columns: 380px 1fr; 
+      gap: 2rem; 
+      height: calc(100vh - 180px); 
+    }
+    
+    .conversations-panel { 
+      background: white; 
+      border-radius: 20px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+      overflow: hidden; 
+      display: flex; 
+      flex-direction: column;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .conversations-header { 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: white; 
+      padding: 1.8rem 2rem; 
+      font-size: 1.4rem; 
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .conversations-list { 
+      overflow-y: auto; 
+      flex: 1; 
+    }
+    
+    .conversation-item { 
+      padding: 1.5rem 1.8rem; 
+      border-bottom: 1px solid #f0f0f0; 
+      cursor: pointer; 
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .conversation-item:hover { 
+      background: #f8f9ff;
+      transform: translateX(4px);
+    }
+    
+    .conversation-item.active { 
+      background: linear-gradient(135deg, #f0f3ff 0%, #e8edff 100%);
+      border-left: 5px solid #667eea;
+      box-shadow: inset 0 0 20px rgba(102, 126, 234, 0.1);
+    }
+    
+    .conversation-user { 
+      font-weight: 700; 
+      font-size: 1.05rem; 
+      color: #2c3e50; 
+      margin-bottom: 0.5rem; 
+    }
+    
+    .conversation-preview { 
+      font-size: 0.9rem; 
+      color: #7f8c8d; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    
+    .conversation-time { 
+      font-size: 0.75rem; 
+      color: #95a5a6; 
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .chat-panel { 
+      background: white; 
+      border-radius: 20px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+      display: flex; 
+      flex-direction: column; 
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .chat-header { 
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+      padding: 1.5rem 2rem; 
+      border-bottom: 2px solid #e0e0e0; 
+      font-weight: 700; 
+      font-size: 1.2rem; 
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .chat-header::before {
+      content: '👤';
+      font-size: 1.5rem;
+    }
+    
+    .chat-messages { 
+      flex: 1; 
+      overflow-y: auto; 
+      padding: 2rem; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 1.2rem;
+      background: linear-gradient(to bottom, #fafbfc 0%, #ffffff 100%);
+    }
+    
+    .message { 
+      max-width: 70%; 
+      padding: 1.2rem 1.5rem; 
+      border-radius: 18px; 
+      line-height: 1.6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      animation: messageSlide 0.3s ease;
+    }
+
+    @keyframes messageSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .message.sent { 
+      align-self: flex-end; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: white; 
+      border-bottom-right-radius: 4px;
+    }
+    
+    .message.received { 
+      align-self: flex-start; 
+      background: white; 
+      color: #2c3e50; 
+      border-bottom-left-radius: 4px;
+      border: 2px solid #f0f0f0;
+    }
+    
+    .message-time { 
+      font-size: 0.75rem; 
+      opacity: 0.8; 
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .chat-input-area { 
+      padding: 1.5rem 2rem; 
+      border-top: 2px solid #f0f0f0; 
+      display: flex; 
+      gap: 1rem;
+      background: #fafbfc;
+    }
+    
+    .chat-input-area input { 
+      flex: 1; 
+      padding: 1.1rem 1.5rem; 
+      border: 2px solid #e8e8e8; 
+      border-radius: 25px; 
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: white;
+    }
+
+    .chat-input-area input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    }
+    
+    .chat-input-area button { 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+      color: white; 
+      border: none; 
+      padding: 1.1rem 2.5rem; 
+      border-radius: 25px; 
+      font-weight: 700; 
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .chat-input-area button:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+
+    .chat-input-area button:active {
+      transform: translateY(0);
+    }
+    
+    .empty-state { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      height: 100%; 
+      color: #95a5a6;
+      padding: 3rem;
+    }
+    
+    .empty-state-icon { 
+      font-size: 5rem; 
+      margin-bottom: 1.5rem; 
+    }
+
+    .empty-state p {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) { 
+      .mensajes-layout { 
+        grid-template-columns: 1fr; 
+      } 
+      
+      .conversations-panel { 
+        display: none; 
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="mensajes-container">
+    <h1 style="font-size: 2.8rem; color: #2c3e50; margin-bottom: 2.5rem; font-weight: 800;">
+      <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">💬 Mis Mensajes</span>
+    </h1>
+    
+    <div class="mensajes-layout">
+      <!-- Panel de Conversaciones -->
+      <div class="conversations-panel">
+        <div class="conversations-header">Conversaciones</div>
+        <div class="conversations-list" id="conversations-list">
+          <!-- Las conversaciones se cargarán aquí -->
+        </div>
+      </div>
+
+      <!-- Panel de Chat -->
+      <div class="chat-panel">
+        <div id="chat-content">
+          <div class="empty-state">
+            <div class="empty-state-icon">💬</div>
+            <p>Selecciona una conversación para empezar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    let conversations = [];
+    let currentConversation = null;
+
+    async function loadConversations() {
+      try {
+        const response = await fetch('http://localhost:4000/api/mensajes');
+        if (!response.ok) throw new Error('Error al cargar conversaciones');
+        
+        const data = await response.json();
+        conversations = data.conversaciones || [];
+        renderConversations();
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('conversations-list').innerHTML = '<p style="padding: 1rem; text-align: center; color: #95a5a6;">Error al cargar mensajes</p>';
+      }
+    }
+
+    function renderConversations() {
+      const container = document.getElementById('conversations-list');
+      
+      if (conversations.length === 0) {
+        container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #95a5a6;">No tienes conversaciones</p>';
+        return;
+      }
+
+      container.innerHTML = conversations.map(conv => {
+        const lastMessage = conv.mensajes[conv.mensajes.length - 1];
+        const otherUser = conv.participantes.find(p => p._id !== '691d2ba4d1e31fd42461170a');
+        const otherUserName = otherUser ? otherUser.nombre : 'Usuario';
+        
+        return `
+          <div class="conversation-item" onclick="openConversation('${conv._id}')">
+            <div class="conversation-user">${otherUserName}</div>
+            <div class="conversation-preview">${lastMessage?.contenido || 'Sin mensajes'}</div>
+            <div class="conversation-time">${lastMessage ? formatTime(lastMessage.createdAt) : ''}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    async function openConversation(conversationId) {
+      try {
+        const response = await fetch(`http://localhost:4000/api/mensajes/${conversationId}`);
+        if (!response.ok) throw new Error('Error al cargar conversación');
+        
+        const data = await response.json();
+        currentConversation = data.conversacion;
+        renderChat();
+        
+        document.querySelectorAll('.conversation-item').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al cargar la conversación');
+      }
+    }
+
+    function renderChat() {
+      if (!currentConversation) return;
+      
+      const otherUser = currentConversation.participantes.find(p => p._id !== '691d2ba4d1e31fd42461170a');
+      const otherUserName = otherUser ? otherUser.nombre : 'Usuario';
+      
+      const chatPanel = document.querySelector('.chat-panel');
+      chatPanel.innerHTML = `
+        <div class="chat-header">${otherUserName}</div>
+        <div class="chat-messages" id="chat-messages">
+          ${currentConversation.mensajes.map(msg => {
+            const isSent = msg.remitente === '691d2ba4d1e31fd42461170a';
+            return `
+              <div class="message ${isSent ? 'sent' : 'received'}">
+                <div>${msg.contenido}</div>
+                <div class="message-time">${formatTime(msg.createdAt)}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+        <div class="chat-input-area">
+          <input type="text" id="message-input" placeholder="Escribe un mensaje..." onkeypress="if(event.key==='Enter') sendMessage()">
+          <button onclick="sendMessage()">Enviar</button>
+        </div>
+      `;
+      
+      const messagesDiv = document.getElementById('chat-messages');
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById('message-input');
+      const mensaje = input.value.trim();
+      
+      if (!mensaje || !currentConversation) return;
+      
+      try {
+        const otherUser = currentConversation.participantes.find(p => p._id !== '691d2ba4d1e31fd42461170a');
+        
+        const response = await fetch('http://localhost:4000/api/mensajes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destinatarioId: otherUser._id,
+            contenido: mensaje
+          })
+        });
+
+        if (!response.ok) throw new Error('Error al enviar mensaje');
+        
+        input.value = '';
+        await openConversation(currentConversation._id);
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al enviar el mensaje');
+      }
+    }
+
+    function formatTime(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diff = now - date;
+      
+      if (diff < 60000) return 'Ahora';
+      if (diff < 3600000) return `${Math.floor(diff / 60000)}m`;
+      if (diff < 86400000) return `${Math.floor(diff / 3600000)}h`;
+      return date.toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadConversations);
+  </script>
+</body>
+</html>

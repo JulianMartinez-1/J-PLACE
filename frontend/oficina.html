@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oficina — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="index.html#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="index.html#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <a href="cart.html" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:inline-flex;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <nav class="breadcrumbs" style="padding:1rem 2rem;background:#f8f9fa;font-size:0.9rem">
+    <a href="index.html" style="color:#666;text-decoration:none">🏠 Inicio</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <a href="index.html#productos" style="color:#666;text-decoration:none">Productos</a>
+    <span style="margin:0 0.5rem;color:#999">/</span>
+    <span style="color:#20A86F;font-weight:600">Oficina</span>
+  </nav>
+
+  <section class="category-hero oficina-hero" data-category="oficina" style="background-image: linear-gradient(135deg, rgba(32,168,111,0.9), rgba(52,152,219,0.8)), url('images/oficina\ flayer.webp');background-size:cover;background-position:center;min-height:350px;display:flex;align-items:center;position:relative;overflow:hidden">
+    <div class="hero-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);z-index:1"></div>
+    <div class="hero-inner" style="position:relative;z-index:2;color:white;text-align:center;max-width:900px;margin:0 auto;padding:2rem">
+      <span class="hero-badge" style="display:inline-block;background:rgba(255,255,255,0.2);padding:0.5rem 1.5rem;border-radius:50px;font-size:0.9rem;margin-bottom:1rem;backdrop-filter:blur(10px)">📎 Productividad & Organización</span>
+      <h1 style="font-size:3rem;margin:1rem 0;text-shadow:0 2px 10px rgba(0,0,0,0.3)">Oficina & Papelería</h1>
+      <p style="font-size:1.2rem;margin-bottom:2rem;opacity:0.95">Equipa tu espacio de trabajo con estilo profesional</p>
+      <div class="hero-stats" style="display:flex;justify-content:center;gap:3rem;margin-top:2rem">
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">500+</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Productos</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">4.8★</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Calificación</span>
+        </div>
+        <div class="stat-item" style="text-align:center">
+          <strong style="display:block;font-size:2rem;margin-bottom:0.3rem">Envío</strong>
+          <span style="font-size:0.9rem;opacity:0.9">Gratis >$500</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="subcategories-section" style="padding:3rem 2rem;background:#f8f9fa">
+    <h2 style="text-align:center;margin-bottom:2rem;font-size:2rem;color:#333">🏢 Explora por Categoría</h2>
+    <div class="subcategories-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;max-width:1200px;margin:0 auto">
+      <a href="#muebles" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">🪑</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#20A86F">Muebles</h3>
+        <span style="font-size:0.9rem;color:#666">124 productos</span>
+      </a>
+      <a href="#papeleria" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">📝</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#20A86F">Papelería</h3>
+        <span style="font-size:0.9rem;color:#666">89 productos</span>
+      </a>
+      <a href="#organizacion" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">📂</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#20A86F">Organización</h3>
+        <span style="font-size:0.9rem;color:#666">56 productos</span>
+      </a>
+      <a href="#tecnologia" class="subcategory-card" style="background:white;padding:2rem 1rem;border-radius:15px;text-align:center;text-decoration:none;color:#333;box-shadow:0 2px 10px rgba(0,0,0,0.08);transition:all 0.3s ease">
+        <div class="subcat-icon" style="font-size:3rem;margin-bottom:1rem">⌨️</div>
+        <h3 style="font-size:1.1rem;margin-bottom:0.5rem;color:#20A86F">Tech Office</h3>
+        <span style="font-size:0.9rem;color:#666">78 productos</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="filters-enhanced" style="padding:2rem;background:white;border-bottom:1px solid #eee;display:flex;gap:2rem;flex-wrap:wrap;align-items:center;justify-content:center;max-width:1400px;margin:0 auto">
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">🔍 Buscar:</label>
+      <input type="search" placeholder="Escritorios, sillas..." class="filter-search" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;width:200px;font-size:0.95rem">
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Ordenar:</label>
+      <select class="filter-select" style="padding:0.6rem 1rem;border:1px solid #ddd;border-radius:8px;font-size:0.95rem;background:white;cursor:pointer">
+        <option>⭐ Más populares</option>
+        <option>💰 Menor precio</option>
+        <option>💎 Mayor precio</option>
+        <option>🆕 Más recientes</option>
+      </select>
+    </div>
+    <div class="filter-group" style="display:flex;align-items:center;gap:0.5rem">
+      <label style="font-weight:600;color:#666">Rango de precio:</label>
+      <div class="price-range" style="display:flex;align-items:center;gap:0.5rem">
+        <input type="number" placeholder="$0" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+        <span style="color:#999">—</span>
+        <input type="number" placeholder="$1000" min="0" style="padding:0.6rem;border:1px solid #ddd;border-radius:8px;width:90px;font-size:0.95rem">
+      </div>
+    </div>
+  </div>
+
+  <section class="products-grid" aria-label="Productos de oficina" style="padding:2rem;max-width:1400px;margin:0 auto">
+    <article class="product-card enhanced" href="#" data-subcategory="muebles" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#ff4757;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">🔥 Más vendido</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Silla ergonómica" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">🪑 Muebles</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Silla Ergonómica de Oficina</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Soporte lumbar ajustable, reposabrazos y base giratoria.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(128 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group" style="display:flex;flex-direction:column;gap:0.3rem">
+            <span class="price-old" style="text-decoration:line-through;color:#999;font-size:0.9rem">$299.00</span>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$249.00</span>
+              <span class="discount" style="background:#ff4757;color:white;padding:0.2rem 0.5rem;border-radius:5px;font-size:0.8rem;font-weight:600">-17%</span>
+            </div>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="escritorio" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#20A86F;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">✨ Nuevo</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Escritorio ajustable" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">🪑 Muebles</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Escritorio Ajustable en Altura</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Transforma entre sentado y de pie con motor eléctrico.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(95 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$449.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="organizacion" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Organizador de escritorio" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">📂 Organización</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Organizador de Escritorio</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Set completo con porta lápices, bandejas y cajones.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐☆ <span style="color:#999;font-size:0.85rem">(76 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$39.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="papeleria" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-badge" style="position:absolute;top:10px;left:10px;background:#ffa502;color:white;padding:0.4rem 0.8rem;border-radius:20px;font-size:0.8rem;font-weight:600;z-index:2">💰 Oferta</div>
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Kit de papelería" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">📝 Papelería</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Kit Completo de Papelería</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Incluye bolígrafos, post-its, clips, grapadora y más.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(203 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group" style="display:flex;flex-direction:column;gap:0.3rem">
+            <span class="price-old" style="text-decoration:line-through;color:#999;font-size:0.9rem">$39.00</span>
+            <div style="display:flex;align-items:center;gap:0.5rem">
+              <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$29.00</span>
+              <span class="discount" style="background:#ffa502;color:white;padding:0.2rem 0.5rem;border-radius:5px;font-size:0.8rem;font-weight:600">-26%</span>
+            </div>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="iluminacion" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Lámpara LED" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">💡 Iluminación</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Lámpara LED de Escritorio</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Luz ajustable con 3 tonos y puerto USB para cargar.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐⭐ <span style="color:#999;font-size:0.85rem">(142 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$54.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="accesorios" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Soporte para laptop" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">⌨️ Tech Office</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Soporte Elevador para Laptop</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">Aluminio ajustable con ventilación para mejor ergonomía.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐☆ <span style="color:#999;font-size:0.85rem">(89 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$44.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+    <article class="product-card enhanced" href="#" data-subcategory="archivo" style="position:relative;display:block;text-decoration:none;color:inherit">
+      <div class="product-image-wrapper" style="position:relative;overflow:hidden;border-radius:10px 10px 0 0">
+        <img src="images/oficina.avif" alt="Archivero móvil" style="width:100%;height:250px;object-fit:cover" />
+        <div class="quick-actions" style="position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:0.5rem;opacity:0;transition:opacity 0.3s ease">
+          <button class="quick-view" title="Vista rápida" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">👁️</button>
+          <button class="add-wishlist" title="Favoritos" style="background:white;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,0.15)">❤️</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:1.2rem">
+        <div class="product-category" style="color:#20A86F;font-size:0.85rem;font-weight:600;margin-bottom:0.5rem">📂 Organización</div>
+        <h4 style="margin:0.5rem 0;font-size:1.1rem">Archivero Móvil con Ruedas</h4>
+        <p style="color:#666;font-size:0.9rem;margin:0.5rem 0">3 cajones con cerradura para documentos tamaño carta.</p>
+        <div class="product-rating" style="margin:0.8rem 0;font-size:0.9rem;color:#ffa502">
+          ⭐⭐⭐⭐☆ <span style="color:#999;font-size:0.85rem">(54 reseñas)</span>
+        </div>
+        <div class="product-footer" style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem">
+          <div class="price-group">
+            <span class="price" style="font-size:1.5rem;font-weight:700;color:#20A86F">$169.00</span>
+          </div>
+          <button class="btn-add-cart" style="background:#20A86F;color:white;border:none;padding:0.8rem 1.5rem;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.95rem;transition:all 0.3s ease">
+            🛒 Agregar
+          </button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <div style="text-align:center; padding:2rem 0;">
+    <button class="load-more" data-i18n="misc.loadMore" style="background:#20A86F;color:white;border:none;padding:1rem 3rem;border-radius:50px;cursor:pointer;font-size:1rem;font-weight:600;box-shadow:0 4px 15px rgba(32,168,111,0.3);transition:all 0.3s ease">Cargar más productos</button>
+  </div>
+
+  <section class="category-benefits" style="background:linear-gradient(135deg,#20A86F,#3498db);padding:3rem 2rem;margin-top:3rem">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem">
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🚚</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Envío Express</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Recibe en 24-48h en pedidos de oficina</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">💼</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Facturación</h3>
+        <p style="opacity:0.9;font-size:0.95rem">CFDI automático para empresas</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🔄</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Devolución 30 días</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Sin preguntas, garantía total</p>
+      </div>
+      <div class="benefit-item" style="text-align:center;color:white">
+        <div class="benefit-icon" style="font-size:3rem;margin-bottom:1rem">🏢</div>
+        <h3 style="font-size:1.3rem;margin-bottom:0.5rem">Compra Corporativa</h3>
+        <p style="opacity:0.9;font-size:0.95rem">Descuentos por volumen desde 10 piezas</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

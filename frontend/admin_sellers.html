@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendedores de Alto Volumen - J-PLACE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>👑 Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin_dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="admin_users.html" class="nav-item">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+        <a href="admin_products.html" class="nav-item">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Productos Reportados</span>
+        </a>
+        <a href="admin_sellers.html" class="nav-item active">
+          <span class="nav-icon">🏪</span>
+          <span class="nav-label">Vendedores</span>
+        </a>
+        <a href="admin_categories.html" class="nav-item">
+          <span class="nav-icon">🏷️</span>
+          <span class="nav-label">Categorías</span>
+        </a>
+        <a href="admin_commissions.html" class="nav-item">
+          <span class="nav-icon">💰</span>
+          <span class="nav-label">Comisiones</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <div>
+          <h1>🏪 Verificación de Vendedores de Alto Volumen</h1>
+          <p class="page-subtitle">Gestiona vendedores destacados y verifica su autenticidad</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-primary" onclick="showVerifyModal()">✓ Verificar Vendedor</button>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <section class="metrics-grid-compact">
+        <div class="metric-card-sm">
+          <div class="metric-value">127</div>
+          <div class="metric-label">Vendedores Activos</div>
+        </div>
+        <div class="metric-card-sm">
+          <div class="metric-value">23</div>
+          <div class="metric-label">Verificados</div>
+        </div>
+        <div class="metric-card-sm">
+          <div class="metric-value">8</div>
+          <div class="metric-label">Pendientes</div>
+        </div>
+        <div class="metric-card-sm">
+          <div class="metric-value">$248K</div>
+          <div class="metric-label">Ventas Totales</div>
+        </div>
+      </section>
+
+      <!-- Filters -->
+      <section class="filters-bar">
+        <input type="search" placeholder="Buscar vendedor..." class="search-input">
+        <select class="filter-select">
+          <option>Todos los estados</option>
+          <option>Verificados</option>
+          <option>No verificados</option>
+          <option>Suspendidos</option>
+        </select>
+        <select class="filter-select">
+          <option>Ordenar por ventas</option>
+          <option>Ordenar por productos</option>
+          <option>Ordenar por fecha</option>
+        </select>
+      </section>
+
+      <!-- Sellers Table -->
+      <section class="table-section">
+        <table class="admin-table-modern">
+          <thead>
+            <tr>
+              <th>Vendedor</th>
+              <th>Productos</th>
+              <th>Ventas</th>
+              <th>Ingresos</th>
+              <th>Rating</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">TS</div>
+                  <div>
+                    <div class="seller-name">TechStore MX ✓</div>
+                    <div class="seller-email">techstore@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>234</strong></td>
+              <td><strong>1,456</strong></td>
+              <td><span class="text-success">$45,890</span></td>
+              <td>
+                <div class="rating">
+                  ⭐ 4.8 <span class="text-muted">(892)</span>
+                </div>
+              </td>
+              <td><span class="badge-success">✓ Verificado</span></td>
+              <td>
+                <button class="btn-ghost-sm">Ver perfil</button>
+                <button class="btn-ghost-sm">Detalles</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">ME</div>
+                  <div>
+                    <div class="seller-name">ModaYEstilo</div>
+                    <div class="seller-email">moda@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>198</strong></td>
+              <td><strong>1,102</strong></td>
+              <td><span class="text-success">$38,450</span></td>
+              <td>
+                <div class="rating">
+                  ⭐ 4.6 <span class="text-muted">(654)</span>
+                </div>
+              </td>
+              <td><span class="badge-warning">⏳ Pendiente</span></td>
+              <td>
+                <button class="btn-ghost-sm" onclick="showVerifyModal('ModaYEstilo')">Verificar</button>
+                <button class="btn-ghost-sm">Ver perfil</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">DP</div>
+                  <div>
+                    <div class="seller-name">Deportes Pro ✓</div>
+                    <div class="seller-email">deportes@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>156</strong></td>
+              <td><strong>843</strong></td>
+              <td><span class="text-success">$29,120</span></td>
+              <td>
+                <div class="rating">
+                  ⭐ 4.9 <span class="text-muted">(421)</span>
+                </div>
+              </td>
+              <td><span class="badge-success">✓ Verificado</span></td>
+              <td>
+                <button class="btn-ghost-sm">Ver perfil</button>
+                <button class="btn-ghost-sm">Detalles</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const token = localStorage.getItem('jplace_token');
+    const rawUser = localStorage.getItem('jplace_user');
+    const currentUser = rawUser ? JSON.parse(rawUser) : null;
+    
+    if (!token || !currentUser || currentUser.role !== 'admin') {
+      alert('Acceso denegado.');
+      location.href = 'index.html';
+    }
+
+    function showVerifyModal(sellerName) {
+      alert(`Verificar vendedor: ${sellerName || 'Nuevo'}`);
+    }
+  </script>
+</body>
+</html>

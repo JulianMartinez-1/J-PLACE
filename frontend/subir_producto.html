@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Publicar producto — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <!-- user-area rellenado por main.js -->
+      </div>
+    </nav>
+  </header>
+
+  <main class="publish-page">
+    <div class="publish-container">
+      <div class="publish-header">
+        <div class="publish-icon">📦</div>
+        <h1>Publicar producto</h1>
+        <p class="publish-subtitle">Completa la información de tu producto para ponerlo a la venta</p>
+      </div>
+
+      <div class="publish-content">
+        <form id="product-form" enctype="multipart/form-data" class="publish-form">
+          
+          <!-- Sección de Imágenes -->
+          <div class="form-section">
+            <div class="section-title">
+              <span class="section-icon">📸</span>
+              <h2>Fotos del producto</h2>
+            </div>
+            <div class="image-upload-area">
+              <input id="images" name="images" type="file" accept="image/*" multiple required style="display:none;" />
+              <label for="images" class="upload-box">
+                <div class="upload-icon">📷</div>
+                <div class="upload-text">
+                  <strong>Haz clic para subir fotos</strong>
+                  <span>o arrastra y suelta aquí</span>
+                </div>
+                <div class="upload-hint">Mínimo 1 foto, máximo 10 • JPG, PNG, WEBP</div>
+              </label>
+              <div id="image-preview" class="image-preview-grid"></div>
+            </div>
+          </div>
+
+          <!-- Sección de Información -->
+          <div class="form-section">
+            <div class="section-title">
+              <span class="section-icon">ℹ️</span>
+              <h2>Información básica</h2>
+            </div>
+            
+            <div class="form-row">
+              <label for="nombre">
+                <span class="label-icon">🏷️</span>
+                Nombre del producto
+              </label>
+              <input id="nombre" name="nombre" type="text" required placeholder="Ej: iPhone 15 Pro Max 256GB" />
+              <small class="field-hint">Sé descriptivo y específico</small>
+            </div>
+
+            <div class="form-row">
+              <label for="category">
+                <span class="label-icon">📂</span>
+                Categoría
+              </label>
+              <select id="category" name="category" required>
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="tecnologia">📱 Tecnología</option>
+                <option value="moda">👔 Moda</option>
+                <option value="hogar">🏠 Hogar</option>
+                <option value="deportes">⚽ Deportes</option>
+                <option value="electronica">💻 Electrónica</option>
+                <option value="juguetes">🧸 Juguetes</option>
+                <option value="herramientas">🔧 Herramientas</option>
+                <option value="libros">📚 Libros</option>
+                <option value="electrodomesticos">🔌 Electrodomésticos</option>
+                <option value="belleza">💄 Belleza</option>
+                <option value="musica">🎵 Música</option>
+                <option value="mascotas">🐾 Mascotas</option>
+                <option value="jardin">🌱 Jardín</option>
+                <option value="alimentos">🍔 Alimentos</option>
+                <option value="automoviles">🚗 Automóviles</option>
+                <option value="arte">🎨 Arte</option>
+                <option value="fotografia">📷 Fotografía</option>
+                <option value="oficina">📎 Oficina</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="precio">
+                <span class="label-icon">💰</span>
+                Precio
+              </label>
+              <div class="price-input-wrapper">
+                <span class="currency-symbol">$</span>
+                <input id="precio" name="precio" type="number" step="0.01" min="0" required placeholder="0.00" />
+                <span class="currency-code">USD</span>
+              </div>
+              <small class="field-hint">Establece un precio justo y competitivo</small>
+            </div>
+          </div>
+
+          <!-- Sección de Descripción -->
+          <div class="form-section">
+            <div class="section-title">
+              <span class="section-icon">📝</span>
+              <h2>Descripción detallada</h2>
+            </div>
+            
+            <div class="form-row">
+              <label for="descripcion">
+                Describe tu producto
+              </label>
+              <textarea id="descripcion" name="descripcion" rows="6" required placeholder="Incluye detalles importantes: estado, características, dimensiones, incluye caja, garantía, etc."></textarea>
+              <div class="char-counter">
+                <span id="char-count">0</span> / 500 caracteres
+              </div>
+            </div>
+          </div>
+
+          <!-- Información de aprobación -->
+          <div class="approval-notice">
+            <div class="notice-icon">⏳</div>
+            <div class="notice-content">
+              <strong>Aprobación requerida</strong>
+              <p>Tu producto será revisado por un administrador antes de publicarse. Recibirás una notificación cuando sea aprobado.</p>
+            </div>
+          </div>
+
+          <div class="form-actions publish-actions">
+            <button type="button" class="btn-secondary" onclick="window.history.back()">
+              ← Cancelar
+            </button>
+            <button type="submit" class="btn-primary publish-submit">
+              <span class="btn-text">📤 Publicar producto</span>
+              <span class="btn-loader hidden">⏳</span>
+            </button>
+          </div>
+        </form>
+
+        <p id="prod-feedback" class="publish-feedback" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-include"></div>
+  <script src="main.js"></script>
+  <script>
+    (function(){
+      const form = document.getElementById('product-form');
+      const feedback = document.getElementById('prod-feedback');
+      const imagesInput = document.getElementById('images');
+      const previewGrid = document.getElementById('image-preview');
+      const descripcionInput = document.getElementById('descripcion');
+      const charCount = document.getElementById('char-count');
+      const btnSubmit = form.querySelector('.publish-submit');
+      const btnText = btnSubmit.querySelector('.btn-text');
+      const btnLoader = btnSubmit.querySelector('.btn-loader');
+
+      // Character counter
+      descripcionInput.addEventListener('input', function(){
+        const length = this.value.length;
+        charCount.textContent = Math.min(length, 500);
+        if(length > 500) {
+          charCount.style.color = 'crimson';
+        } else {
+          charCount.style.color = 'inherit';
+        }
+      });
+
+      // Drag and drop functionality
+      const uploadBox = document.querySelector('.upload-box');
+      
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadBox.addEventListener(eventName, preventDefaults, false);
+      });
+      
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      
+      ['dragenter', 'dragover'].forEach(eventName => {
+        uploadBox.addEventListener(eventName, () => {
+          uploadBox.classList.add('drag-active');
+        }, false);
+      });
+      
+      ['dragleave', 'drop'].forEach(eventName => {
+        uploadBox.addEventListener(eventName, () => {
+          uploadBox.classList.remove('drag-active');
+        }, false);
+      });
+      
+      uploadBox.addEventListener('drop', function(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        imagesInput.files = files;
+        imagesInput.dispatchEvent(new Event('change'));
+      }, false);
+
+      // Image preview
+      imagesInput.addEventListener('change', function(){
+        previewGrid.innerHTML = '';
+        const files = Array.from(this.files || []);
+        
+        if(files.length > 10) {
+          feedback.className = 'publish-feedback error';
+          feedback.textContent = 'Máximo 10 imágenes permitidas';
+          this.value = '';
+          return;
+        }
+
+        files.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = function(e){
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.innerHTML = `
+              <img src="${e.target.result}" alt="Preview ${index + 1}">
+              <button type="button" class="remove-preview" data-index="${index}" title="Eliminar">✕</button>
+              ${index === 0 ? '<span class="main-badge">Principal</span>' : ''}
+            `;
+            previewGrid.appendChild(previewItem);
+          };
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Remove image from preview
+      previewGrid.addEventListener('click', function(e){
+        if(e.target.classList.contains('remove-preview')){
+          const index = parseInt(e.target.dataset.index);
+          const dt = new DataTransfer();
+          const files = Array.from(imagesInput.files);
+          files.forEach((file, i) => {
+            if(i !== index) dt.items.add(file);
+          });
+          imagesInput.files = dt.files;
+          imagesInput.dispatchEvent(new Event('change'));
+        }
+      });
+
+      // Check session
+      const rawUser = localStorage.getItem('jplace_user');
+      const token = localStorage.getItem('jplace_token');
+      if (!rawUser || !token) {
+        feedback.className = 'publish-feedback error';
+        feedback.textContent = '🔒 Debes iniciar sesión para publicar productos.';
+        form.querySelectorAll('input, textarea, select, button').forEach(el=>el.disabled=true);
+        return;
+      }
+
+      // Form submit
+      form.addEventListener('submit', async function(e){
+        e.preventDefault(); 
+        feedback.textContent='';
+        feedback.className = 'publish-feedback';
+        
+        const nombre = document.getElementById('nombre').value.trim();
+        const precio = document.getElementById('precio').value;
+        const descripcion = document.getElementById('descripcion').value.trim();
+        const category = document.getElementById('category').value;
+        const files = Array.from(imagesInput.files || []);
+        
+        console.log('📋 Datos del formulario:', {
+          nombre: nombre,
+          nombreLength: nombre.length,
+          precio: precio,
+          precioNumber: Number(precio),
+          descripcion: descripcion.substring(0, 50) + '...',
+          descripcionLength: descripcion.length,
+          category: category,
+          filesCount: files.length
+        });
+
+        // Validations
+        if (!nombre || nombre.length < 3) { 
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ El nombre debe tener al menos 3 caracteres.';
+          feedback.style.display = 'flex';
+          console.log('Validación falló: nombre muy corto');
+          return; 
+        }
+        if (!category) { 
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ Selecciona una categoría.';
+          feedback.style.display = 'flex';
+          console.log('Validación falló: sin categoría');
+          return; 
+        }
+        if (!precio || Number(precio) <= 0) { 
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ El precio debe ser mayor a cero.';
+          feedback.style.display = 'flex';
+          console.log('Validación falló: precio inválido');
+          return; 
+        }
+        if (!descripcion || descripcion.length < 20) { 
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ La descripción debe tener al menos 20 caracteres.';
+          feedback.style.display = 'flex';
+          console.log('Validación falló: descripción muy corta', descripcion.length);
+          return; 
+        }
+        if (!files.length) { 
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ Se requiere al menos 1 foto del producto.';
+          feedback.style.display = 'flex';
+          console.log('Validación falló: sin imágenes');
+          return; 
+        }
+        
+        console.log('✅ Todas las validaciones pasaron, enviando al servidor...');
+
+        // Show loader
+        btnText.classList.add('hidden');
+        btnLoader.classList.remove('hidden');
+        btnSubmit.disabled = true;
+
+        const fd = new FormData(); 
+        fd.append('nombre', nombre); 
+        fd.append('precio', precio); 
+        fd.append('descripcion', descripcion);
+        fd.append('category', category);
+        files.forEach(f => fd.append('images', f, f.name));
+
+        try {
+          const res = await fetch('http://localhost:4000/api/productos', {
+            method: 'POST', body: fd, headers: { 'Authorization': 'Bearer ' + token }
+          });
+          const data = await res.json().catch(()=>({}));
+          
+          console.log('Respuesta del servidor:', { status: res.status, data });
+          
+          btnText.classList.remove('hidden');
+          btnLoader.classList.add('hidden');
+          btnSubmit.disabled = false;
+
+          if (res.status === 201) {
+            feedback.className = 'publish-feedback success';
+            feedback.textContent = '✅ ' + (data.mensaje || 'Producto enviado. Espera la confirmación del administrador.');
+            form.querySelectorAll('input, textarea, select, button').forEach(el=>el.disabled=true);
+            setTimeout(() => window.location.href = 'index.html', 3000);
+            return;
+          }
+          
+          // Mostrar errores de validación específicos
+          if (res.status === 400 && data.errors && Array.isArray(data.errors)) {
+            const errorMessages = data.errors.map(err => `${err.field}: ${err.message}`).join(', ');
+            feedback.className='publish-feedback error';
+            feedback.textContent = '❌ ' + errorMessages;
+            console.error('Errores de validación:', data.errors);
+            return;
+          }
+          
+          feedback.className='publish-feedback error';
+          feedback.textContent = '❌ ' + (data.msg || data.error || 'Error subiendo el producto.');
+          console.error('Error del servidor:', data);
+        } catch(err) {
+          btnText.classList.remove('hidden');
+          btnLoader.classList.add('hidden');
+          btnSubmit.disabled = false;
+          feedback.className='publish-feedback error'; 
+          feedback.textContent='❌ No fue posible conectar con el servidor.'; 
+          console.error('Error de conexión:', err);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revisar Producto - J-PLACE Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="approval-page-body">
+  
+  <div class="approval-container">
+    <header class="approval-header">
+      <div class="approval-brand">
+        <h1>🛒 J-PLACE</h1>
+        <span class="approval-subtitle">Panel de Aprobación</span>
+      </div>
+    </header>
+
+    <main class="approval-main">
+      <!-- Loading state -->
+      <div id="loadingState" class="loading-state">
+        <div class="spinner-large"></div>
+        <p>Cargando información del producto...</p>
+      </div>
+
+      <!-- Error state -->
+      <div id="errorState" class="error-state" style="display: none;">
+        <div class="error-icon">⚠️</div>
+        <h2 id="errorTitle">Error</h2>
+        <p id="errorMessage"></p>
+        <a href="admin_users.html" class="btn-back">Volver al Panel Admin</a>
+      </div>
+
+      <!-- Product review state -->
+      <div id="productState" class="product-review-card" style="display: none;">
+        <div class="review-header">
+          <h2>Revisión de Producto Pendiente</h2>
+          <span class="badge-pending">Pendiente de aprobación</span>
+        </div>
+
+        <div class="product-details-grid">
+          <!-- Images Section -->
+          <div class="product-images-section">
+            <div class="main-image-container">
+              <img id="mainImage" src="" alt="Producto" class="main-product-image">
+            </div>
+            <div id="thumbnailsContainer" class="thumbnails-grid"></div>
+          </div>
+
+          <!-- Info Section -->
+          <div class="product-info-section">
+            <div class="info-group">
+              <label class="info-label">Nombre del producto</label>
+              <p id="productName" class="info-value"></p>
+            </div>
+
+            <div class="info-row">
+              <div class="info-group">
+                <label class="info-label">Categoría</label>
+                <p id="productCategory" class="info-value category-badge"></p>
+              </div>
+              <div class="info-group">
+                <label class="info-label">Precio</label>
+                <p id="productPrice" class="info-value price-value"></p>
+              </div>
+            </div>
+
+            <div class="info-group">
+              <label class="info-label">Descripción</label>
+              <p id="productDescription" class="info-value description-text"></p>
+            </div>
+
+            <div class="info-group">
+              <label class="info-label">Información del vendedor</label>
+              <div class="owner-info">
+                <p><strong>ID:</strong> <span id="ownerId"></span></p>
+                <p><strong>Usuario:</strong> <span id="ownerName"></span></p>
+              </div>
+            </div>
+
+            <div class="info-group">
+              <label class="info-label">Fecha de solicitud</label>
+              <p id="createdAt" class="info-value"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="approval-actions">
+          <button id="btnReject" class="btn-reject">
+            <span class="btn-icon">❌</span>
+            Rechazar Producto
+          </button>
+          <button id="btnApprove" class="btn-approve">
+            <span class="btn-icon">✅</span>
+            Aprobar y Publicar
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content confirm-modal">
+      <div class="modal-header">
+        <h3 id="confirmTitle">Confirmar acción</h3>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage"></p>
+      </div>
+      <div class="modal-actions">
+        <button id="btnCancelModal" class="btn-secondary">Cancelar</button>
+        <button id="btnConfirmModal" class="btn-primary">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Detectar automáticamente el host y puerto desde donde se carga la página
+    const BACKEND_URL = `${window.location.protocol}//${window.location.host}`;
+    
+    // Get token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+    
+    let currentProduct = null;
+    let pendingAction = null;
+
+    // Elements
+    const loadingState = document.getElementById('loadingState');
+    const errorState = document.getElementById('errorState');
+    const productState = document.getElementById('productState');
+    const confirmModal = document.getElementById('confirmModal');
+
+    // Load product data
+    async function loadProductData() {
+      if (!token) {
+        showError('Token no válido', 'No se proporcionó un token de aprobación válido en la URL.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/productos/review/${token}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.msg || 'Error al cargar el producto');
+        }
+
+        currentProduct = data.producto;
+        renderProduct(currentProduct);
+        
+        loadingState.style.display = 'none';
+        productState.style.display = 'block';
+      } catch (error) {
+        console.error('Error loading product:', error);
+        showError('Error al cargar', error.message || 'No se pudo cargar la información del producto.');
+      }
+    }
+
+    // Render product details
+    function renderProduct(producto) {
+      // Name
+      document.getElementById('productName').textContent = producto.nombre;
+      
+      // Category
+      const categoryEl = document.getElementById('productCategory');
+      categoryEl.textContent = producto.category;
+      
+      // Price
+      document.getElementById('productPrice').textContent = `$${Number(producto.precio).toLocaleString('es-MX')}`;
+      
+      // Description
+      document.getElementById('productDescription').textContent = producto.descripcion;
+      
+      // Owner info
+      document.getElementById('ownerId').textContent = producto.owner?._id || producto.owner || 'N/A';
+      document.getElementById('ownerName').textContent = producto.owner?.nombre || 'N/A';
+      
+      // Created at
+      const createdDate = new Date(producto.createdAt);
+      document.getElementById('createdAt').textContent = createdDate.toLocaleDateString('es-MX', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      // Images
+      if (producto.images && producto.images.length > 0) {
+        const mainImage = document.getElementById('mainImage');
+        mainImage.src = `${BACKEND_URL}${producto.images[0]}`;
+        mainImage.onerror = () => {
+          mainImage.src = 'images/placeholder.png';
+        };
+        
+        // Thumbnails
+        const thumbnailsContainer = document.getElementById('thumbnailsContainer');
+        thumbnailsContainer.innerHTML = '';
+        
+        producto.images.forEach((imgPath, index) => {
+          const thumb = document.createElement('img');
+          thumb.src = `${BACKEND_URL}${imgPath}`;
+          thumb.alt = `Imagen ${index + 1}`;
+          thumb.className = 'thumbnail-image';
+          if (index === 0) thumb.classList.add('active');
+          
+          thumb.onclick = () => {
+            mainImage.src = `${BACKEND_URL}${imgPath}`;
+            document.querySelectorAll('.thumbnail-image').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          };
+          
+          thumb.onerror = () => {
+            thumb.src = 'images/placeholder.png';
+          };
+          
+          thumbnailsContainer.appendChild(thumb);
+        });
+      }
+    }
+
+    // Show error state
+    function showError(title, message) {
+      loadingState.style.display = 'none';
+      productState.style.display = 'none';
+      errorState.style.display = 'flex';
+      document.getElementById('errorTitle').textContent = title;
+      document.getElementById('errorMessage').textContent = message;
+    }
+
+    // Show confirmation modal
+    function showConfirmModal(action) {
+      pendingAction = action;
+      const title = action === 'approve' ? 'Aprobar Producto' : 'Rechazar Producto';
+      const message = action === 'approve' 
+        ? `¿Estás seguro de que deseas aprobar y publicar "${currentProduct.nombre}"? Este producto será visible públicamente en la categoría ${currentProduct.category}.`
+        : `¿Estás seguro de que deseas rechazar "${currentProduct.nombre}"? El vendedor será notificado del rechazo.`;
+      
+      document.getElementById('confirmTitle').textContent = title;
+      document.getElementById('confirmMessage').textContent = message;
+      
+      const confirmBtn = document.getElementById('btnConfirmModal');
+      confirmBtn.className = action === 'approve' ? 'btn-primary btn-approve' : 'btn-primary btn-reject';
+      confirmBtn.innerHTML = action === 'approve' 
+        ? '<span class="btn-icon">✅</span> Aprobar' 
+        : '<span class="btn-icon">❌</span> Rechazar';
+      
+      confirmModal.style.display = 'flex';
+    }
+
+    // Hide confirmation modal
+    function hideConfirmModal() {
+      confirmModal.style.display = 'none';
+      pendingAction = null;
+    }
+
+    // Execute approval/rejection
+    async function executeAction(action) {
+      hideConfirmModal();
+      
+      const endpoint = action === 'approve' 
+        ? `${BACKEND_URL}/api/productos/approve-confirmed/${token}`
+        : `${BACKEND_URL}/api/productos/reject/${token}`;
+      
+      try {
+        // Show loading
+        productState.style.display = 'none';
+        loadingState.style.display = 'flex';
+        loadingState.querySelector('p').textContent = action === 'approve' 
+          ? 'Aprobando producto...' 
+          : 'Rechazando producto...';
+        
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.msg || 'Error al procesar la acción');
+        }
+        
+        // Success - redirect after a moment
+        loadingState.querySelector('p').textContent = data.msg || (action === 'approve' ? 'Producto aprobado exitosamente' : 'Producto rechazado');
+        
+        setTimeout(() => {
+          // Redirect to category page
+          if (action === 'approve' && currentProduct.category) {
+            window.location.href = `${currentProduct.category}.html?approved=1&productId=${currentProduct._id}`;
+          } else {
+            window.location.href = 'admin_users.html';
+          }
+        }, 1500);
+        
+      } catch (error) {
+        console.error('Error executing action:', error);
+        showError('Error', error.message || 'No se pudo completar la acción.');
+      }
+    }
+
+    // Event listeners
+    document.getElementById('btnApprove').addEventListener('click', () => {
+      showConfirmModal('approve');
+    });
+
+    document.getElementById('btnReject').addEventListener('click', () => {
+      showConfirmModal('reject');
+    });
+
+    document.getElementById('btnCancelModal').addEventListener('click', hideConfirmModal);
+    
+    document.getElementById('btnConfirmModal').addEventListener('click', () => {
+      if (pendingAction) {
+        executeAction(pendingAction);
+      }
+    });
+
+    // Close modal on overlay click
+    confirmModal.addEventListener('click', (e) => {
+      if (e.target === confirmModal) {
+        hideConfirmModal();
+      }
+    });
+
+    // Initialize
+    loadProductData();
+  </script>
+</body>
+</html>

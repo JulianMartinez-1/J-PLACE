@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panel Admin - Usuarios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>👑 Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin_dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="admin_users.html" class="nav-item active">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+        <a href="admin_products.html" class="nav-item">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Productos Reportados</span>
+        </a>
+        <a href="admin_sellers.html" class="nav-item">
+          <span class="nav-icon">🏪</span>
+          <span class="nav-label">Vendedores</span>
+        </a>
+        <a href="admin_categories.html" class="nav-item">
+          <span class="nav-icon">🏷️</span>
+          <span class="nav-label">Categorías</span>
+        </a>
+        <a href="admin_commissions.html" class="nav-item">
+          <span class="nav-icon">💰</span>
+          <span class="nav-label">Comisiones</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <div>
+          <h1>👥 Panel de Usuarios</h1>
+          <p class="page-subtitle">Gestiona cuentas, roles y estados. Todas las acciones son auditadas.</p>
+        </div>
+      </div>
+
+    <section class="admin-stats" id="admin-stats">
+      <div class="stat-card highlight">
+        <div class="stat-label">Total Usuarios</div>
+        <div class="stat-value" id="stat-total">—</div>
+        <div class="stat-change">Todos los registros</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Activos</div>
+        <div class="stat-value" id="stat-active" style="color:#16824f;">—</div>
+        <div class="stat-change">Cuentas activas</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Administradores</div>
+        <div class="stat-value" id="stat-admins" style="color:#0b3b2a;">—</div>
+        <div class="stat-change">Con permisos admin</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Moderadores</div>
+        <div class="stat-value" id="stat-mods" style="color:#ff8a00;">—</div>
+        <div class="stat-change">Rol moderador</div>
+      </div>
+    </section>
+
+    <section style="margin-top:1.4rem">
+      <div class="admin-toolbar">
+        <div class="admin-search">
+          <input id="search-input" type="search" placeholder="Buscar por nombre o correo" />
+        </div>
+        <div class="admin-actions">
+          <select id="role-filter" style="padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+            <option value="">Todos los roles</option>
+            <option value="user">Usuario</option>
+            <option value="moderator">Moderador</option>
+            <option value="admin">Administrador</option>
+          </select>
+          <select id="state-filter" style="padding:10px; border-radius:8px; border:1px solid rgba(0,0,0,0.08);">
+            <option value="">Todos</option>
+            <option value="active">Activos</option>
+            <option value="disabled">Deshabilitados</option>
+          </select>
+          <button id="btn-create-user" class="btn-primary">Crear usuario</button>
+        </div>
+      </div>
+
+      <div style="overflow:auto;">
+        <table id="users-table" class="admin-table" aria-live="polite">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody">
+            <tr><td colspan="5" class="admin-empty">Cargando usuarios...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    </main>
+  </div>
+
+  <div id="admin-user-modal" class="modal" style="display:none;">
+    <div class="modal-dialog"><div class="modal-content">
+      <header class="modal-header"><h3 id="modal-title">Crear usuario</h3><button class="modal-close">×</button></header>
+      <form id="admin-user-form" class="edit-form">
+        <input type="hidden" id="user-id" />
+        <div class="form-row"><label>Nombre<input id="u-nombre" name="nombre" required /></label></div>
+        <div class="form-row"><label>Correo<input id="u-email" name="email" type="email" required /></label></div>
+        <div class="form-row"><label>Contraseña<input id="u-password" name="password" type="password" /></label><small class="muted">Dejar vacío para no cambiar</small></div>
+        <div class="form-row two-col">
+          <div><label>Rol<select id="u-role" name="role"><option value="user">Usuario</option><option value="moderator">Moderador</option><option value="admin">Administrador</option></select></label></div>
+          <div><label>Estado<select id="u-active"><option value="true">Activo</option><option value="false">Deshabilitado</option></select></label></div>
+        </div>
+        <div class="form-actions"><button class="btn-primary" type="submit">Guardar</button> <button type="button" class="btn-secondary modal-cancel">Cancelar</button></div>
+        <p id="form-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </div></div>
+  </div>
+
+  <script>
+    console.log('🚀 ADMIN PANEL - JWT DESHABILITADO');
+    (function(){
+      const apiOrigin = (location.protocol==='file:'||location.hostname==='localhost'||location.hostname==='127.0.0.1') ? 'http://localhost:4000' : location.origin;
+      const token = null; // JWT deshabilitado temporalmente
+      
+      console.log('⚠️ JWT DESHABILITADO - Acceso sin autenticación');
+
+      const tbodyEl = document.getElementById('users-tbody');
+      const searchInput = document.getElementById('search-input');
+      const roleFilter = document.getElementById('role-filter');
+      const stateFilter = document.getElementById('state-filter');
+      const btnCreate = document.getElementById('btn-create-user');
+
+      async function fetchUsers(){
+        if (tbodyEl) tbodyEl.innerHTML = '<tr><td colspan="5" style="opacity:.7">Cargando usuarios...</td></tr>';
+        const qs = new URLSearchParams(); if(searchInput.value) qs.set('q', searchInput.value); if(roleFilter.value) qs.set('role', roleFilter.value); if(stateFilter.value) qs.set('state', stateFilter.value);
+        try{
+          const res = await fetch(`${apiOrigin}/api/admin/users?${qs.toString()}`);
+          if(!res.ok){ const t = await res.json().catch(()=>({})); throw new Error(t.msg||('Error '+res.status)); }
+          const list = await res.json(); renderList(list);
+        }catch(err){ console.error(err); if (tbodyEl) tbodyEl.innerHTML = '<tr><td colspan="5" class="admin-empty">Error cargando usuarios.</td></tr>'; window.__jplace_showToast && window.__jplace_showToast('Error cargando usuarios','error'); }
+      }
+
+      function updateStats(list){
+        if (!Array.isArray(list)) return;
+        const total = list.length;
+        const active = list.filter(u => u.isActive).length;
+        const admins = list.filter(u => u.role === 'admin').length;
+        const mods = list.filter(u => u.role === 'moderator').length;
+        document.getElementById('stat-total').textContent = total;
+        document.getElementById('stat-active').textContent = active;
+        document.getElementById('stat-admins').textContent = admins;
+        document.getElementById('stat-mods').textContent = mods;
+      }
+
+      function renderList(list){
+        const tbody = document.getElementById('users-tbody');
+        if(!Array.isArray(list) || !list.length){ tbody.innerHTML = '<tr><td colspan="5" class="admin-empty">No hay usuarios que mostrar.</td></tr>'; updateStats([]); return; }
+        updateStats(list);
+        tbody.innerHTML = '';
+        list.forEach(u=>{
+          const tr = document.createElement('tr');
+          const nameTd = document.createElement('td'); nameTd.innerHTML = `<strong>${u.nombre || '-'} </strong><div class="muted" style="font-size:.9rem">${u.email||''}</div>`;
+          const emailTd = document.createElement('td'); emailTd.textContent = u.email || '';
+          const roleTd = document.createElement('td'); const roleBadge = document.createElement('span'); roleBadge.className = 'badge-role '+(u.role||'user'); roleBadge.textContent = (u.role||'user').toUpperCase(); roleTd.appendChild(roleBadge);
+          const stateTd = document.createElement('td'); const stateBadge = document.createElement('span'); stateBadge.className = 'badge-state '+(u.isActive? 'active':'disabled'); stateBadge.textContent = u.isActive? 'Activo' : 'Deshabilitado'; stateTd.appendChild(stateBadge);
+          const actionsTd = document.createElement('td'); actionsTd.style.minWidth='180px';
+          const edit = document.createElement('button'); edit.className='btn-secondary'; edit.textContent='Editar'; edit.addEventListener('click', ()=>openModal(u));
+          const del = document.createElement('button'); del.className='btn-ghost'; del.textContent='Eliminar'; del.addEventListener('click', ()=>openConfirmDelete(u._id, u.nombre));
+          actionsTd.appendChild(edit); actionsTd.appendChild(del);
+          tr.appendChild(nameTd); tr.appendChild(emailTd); tr.appendChild(roleTd); tr.appendChild(stateTd); tr.appendChild(actionsTd);
+          tbody.appendChild(tr);
+        });
+        window.__jplace_afterRenderProducts && window.__jplace_afterRenderProducts(document.getElementById('users-table'));
+      }
+
+      // modal handling
+      const modal = document.getElementById('admin-user-modal');
+      const form = document.getElementById('admin-user-form');
+      document.querySelectorAll('.modal-close, .modal-cancel').forEach(b=>b.addEventListener('click', ()=>{ modal.style.display='none'; }));
+      btnCreate.addEventListener('click', ()=>{ openModal(); });
+
+      function openModal(user){
+        document.getElementById('form-feedback').textContent='';
+        const id = user? (user._id||user.id) : '';
+        document.getElementById('user-id').value = id;
+        document.getElementById('u-nombre').value = user? user.nombre : '';
+        document.getElementById('u-email').value = user? user.email : '';
+        document.getElementById('u-password').value = '';
+        document.getElementById('u-role').value = user? user.role : 'user';
+        document.getElementById('u-active').value = user? String(!!user.isActive) : 'true';
+        document.getElementById('modal-title').textContent = id ? 'Editar usuario' : 'Crear usuario';
+        modal.style.display = 'block';
+      }
+
+      form.addEventListener('submit', async (ev)=>{
+        ev.preventDefault();
+        const id = document.getElementById('user-id').value;
+        const payload = {
+          nombre: document.getElementById('u-nombre').value.trim(),
+          email: document.getElementById('u-email').value.trim(),
+          role: document.getElementById('u-role').value,
+          isActive: document.getElementById('u-active').value === 'true'
+        };
+        const pw = document.getElementById('u-password').value;
+        if(pw) payload.password = pw;
+        try{
+          const method = id ? 'PUT' : 'POST';
+          const url = id ? `${apiOrigin}/api/admin/users/${encodeURIComponent(id)}` : `${apiOrigin}/api/admin/users`;
+          const res = await fetch(url, { method, headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+token }, body: JSON.stringify(payload) });
+          const j = await res.json(); if(!res.ok) throw new Error(j.msg||'Error');
+          window.__jplace_showToast && window.__jplace_showToast(j.msg || 'Listo', { type: 'success' });
+          modal.style.display='none'; fetchUsers();
+        }catch(err){ console.error(err); document.getElementById('form-feedback').textContent = err.message || 'Error'; document.getElementById('form-feedback').style.color='crimson'; }
+      });
+
+      // Confirm modal flow (non-blocking)
+      function openConfirmDelete(id, name){
+        // create modal if not exists
+        let cm = document.getElementById('confirm-delete-modal');
+        if(!cm){ cm = document.createElement('div'); cm.id='confirm-delete-modal'; cm.className='confirm-modal'; cm.style.display='none'; cm.innerHTML = `<div class="confirm-dialog"><h3>Eliminar usuario</h3><p id="confirm-msg">¿Confirma eliminar este usuario?</p><div class="confirm-actions"><button id="confirm-cancel" class="btn-secondary">Cancelar</button><button id="confirm-ok" class="btn-primary">Eliminar</button></div></div>`; document.body.appendChild(cm); }
+        document.getElementById('confirm-msg').textContent = `¿Confirma eliminar al usuario "${name || ''}"? Esta acción es irreversible.`;
+        cm.style.display='flex'; document.getElementById('confirm-cancel').onclick = ()=>{ cm.style.display='none'; };
+        document.getElementById('confirm-ok').onclick = async ()=>{
+          cm.style.display='none';
+          try{
+            const res = await fetch(`${apiOrigin}/api/admin/users/${encodeURIComponent(id)}`, { method:'DELETE', headers:{ 'Authorization':'Bearer '+token } });
+            const j = await res.json(); if(!res.ok) throw new Error(j.msg||'Error');
+            window.__jplace_showToast && window.__jplace_showToast(j.msg || 'Usuario eliminado', { type:'success' });
+            fetchUsers();
+          }catch(err){ console.error(err); window.__jplace_showToast && window.__jplace_showToast('Error eliminando usuario', { type:'error' }); }
+        };
+      }
+
+      // wire filters
+      [searchInput, roleFilter, stateFilter].forEach(el => el.addEventListener('input', () => { setTimeout(fetchUsers, 200); }));
+
+      fetchUsers();
+    })();
+  </script>
+  <script src="main.js"></script>
+</body>
+</html>

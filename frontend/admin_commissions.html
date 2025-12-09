@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Comisiones - J-PLACE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>👑 Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin_dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="admin_users.html" class="nav-item">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+        <a href="admin_products.html" class="nav-item">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Productos Reportados</span>
+        </a>
+        <a href="admin_sellers.html" class="nav-item">
+          <span class="nav-icon">🏪</span>
+          <span class="nav-label">Vendedores</span>
+        </a>
+        <a href="admin_categories.html" class="nav-item">
+          <span class="nav-icon">🏷️</span>
+          <span class="nav-label">Categorías</span>
+        </a>
+        <a href="admin_commissions.html" class="nav-item active">
+          <span class="nav-icon">💰</span>
+          <span class="nav-label">Comisiones</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <div>
+          <h1>💰 Sistema de Comisiones y Pagos</h1>
+          <p class="page-subtitle">Gestiona comisiones de venta y pagos a vendedores</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary">📥 Exportar</button>
+          <button class="btn-primary">Procesar Pagos</button>
+        </div>
+      </div>
+
+      <!-- Financial Stats -->
+      <section class="metrics-grid">
+        <div class="metric-card highlight">
+          <div class="metric-header">
+            <span class="metric-icon">💵</span>
+            <span class="metric-trend positive">+18%</span>
+          </div>
+          <div class="metric-value">$12,450</div>
+          <div class="metric-label">Comisiones del Mes</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">⏳</span>
+            <span class="metric-trend warning">!</span>
+          </div>
+          <div class="metric-value">$8,920</div>
+          <div class="metric-label">Pagos Pendientes</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">✓</span>
+            <span class="metric-trend positive">+24%</span>
+          </div>
+          <div class="metric-value">$45,890</div>
+          <div class="metric-label">Pagos Completados</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-icon">📊</span>
+          </div>
+          <div class="metric-value">12.5%</div>
+          <div class="metric-label">Comisión Promedio</div>
+        </div>
+      </section>
+
+      <!-- Commission Settings -->
+      <section class="commission-settings">
+        <h2 class="section-title">Configuración de Comisiones por Categoría</h2>
+        <div class="settings-grid">
+          <div class="setting-card">
+            <div class="setting-header">
+              <span class="category-icon">💻</span>
+              <h3>Tecnología</h3>
+            </div>
+            <div class="setting-content">
+              <div class="setting-row">
+                <span>Comisión actual:</span>
+                <strong>15%</strong>
+              </div>
+              <input type="range" min="5" max="30" value="15" class="commission-slider">
+              <div class="setting-actions">
+                <button class="btn-ghost-sm">Guardar</button>
+                <button class="btn-ghost-sm">Restaurar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-card">
+            <div class="setting-header">
+              <span class="category-icon">👗</span>
+              <h3>Moda</h3>
+            </div>
+            <div class="setting-content">
+              <div class="setting-row">
+                <span>Comisión actual:</span>
+                <strong>12%</strong>
+              </div>
+              <input type="range" min="5" max="30" value="12" class="commission-slider">
+              <div class="setting-actions">
+                <button class="btn-ghost-sm">Guardar</button>
+                <button class="btn-ghost-sm">Restaurar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-card">
+            <div class="setting-header">
+              <span class="category-icon">🏠</span>
+              <h3>Hogar</h3>
+            </div>
+            <div class="setting-content">
+              <div class="setting-row">
+                <span>Comisión actual:</span>
+                <strong>10%</strong>
+              </div>
+              <input type="range" min="5" max="30" value="10" class="commission-slider">
+              <div class="setting-actions">
+                <button class="btn-ghost-sm">Guardar</button>
+                <button class="btn-ghost-sm">Restaurar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Payments Table -->
+      <section class="table-section">
+        <h2 class="section-title">Pagos Pendientes de Procesar</h2>
+        <table class="admin-table-modern">
+          <thead>
+            <tr>
+              <th>Vendedor</th>
+              <th>Ventas</th>
+              <th>Total Ventas</th>
+              <th>Comisión</th>
+              <th>Pago al Vendedor</th>
+              <th>Método</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">TS</div>
+                  <div>
+                    <div class="seller-name">TechStore MX</div>
+                    <div class="seller-email">techstore@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>45</strong> ventas</td>
+              <td><span class="text-primary">$18,920</span></td>
+              <td><span class="text-success">$2,838</span> (15%)</td>
+              <td><strong>$16,082</strong></td>
+              <td><span class="badge-info">Transferencia</span></td>
+              <td>
+                <button class="btn-success-sm">💳 Pagar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">ME</div>
+                  <div>
+                    <div class="seller-name">ModaYEstilo</div>
+                    <div class="seller-email">moda@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>38</strong> ventas</td>
+              <td><span class="text-primary">$12,450</span></td>
+              <td><span class="text-success">$1,494</span> (12%)</td>
+              <td><strong>$10,956</strong></td>
+              <td><span class="badge-info">PayPal</span></td>
+              <td>
+                <button class="btn-success-sm">💳 Pagar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="seller-cell">
+                  <div class="seller-avatar">DP</div>
+                  <div>
+                    <div class="seller-name">Deportes Pro</div>
+                    <div class="seller-email">deportes@example.com</div>
+                  </div>
+                </div>
+              </td>
+              <td><strong>29</strong> ventas</td>
+              <td><span class="text-primary">$9,870</span></td>
+              <td><span class="text-success">$1,233</span> (12.5%)</td>
+              <td><strong>$8,637</strong></td>
+              <td><span class="badge-info">Transferencia</span></td>
+              <td>
+                <button class="btn-success-sm">💳 Pagar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const token = localStorage.getItem('jplace_token');
+    const rawUser = localStorage.getItem('jplace_user');
+    const currentUser = rawUser ? JSON.parse(rawUser) : null;
+    
+    if (!token || !currentUser || currentUser.role !== 'admin') {
+      alert('Acceso denegado.');
+      location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

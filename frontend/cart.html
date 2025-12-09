@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Carrito — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png" type="image/png"> 
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .cart-container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .cart-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .cart-header h1 {
+      font-size: 2.8rem;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .cart-empty-icon {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cart-empty h2 {
+      font-size: 1.5rem;
+      color: #7f8c8d;
+      margin-bottom: 1rem;
+    }
+
+    .cart-items {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .vendor-section {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .vendor-section:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      transform: translateY(-2px);
+    }
+
+    .vendor-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vendor-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+      pointer-events: none;
+    }
+
+    .vendor-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .vendor-name::before {
+      content: '🏪';
+      font-size: 1.5rem;
+    }
+
+    .vendor-actions {
+      display: none;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.8rem;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .cart-item:hover {
+      background: #fafbfc;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-image {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-seller {
+      font-size: 0.9rem;
+      color: #7f8c8d;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-price {
+      font-size: 1.1rem;
+      color: #27ae60;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .quantity-btn {
+      background: #3498db;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .quantity-btn:hover {
+      background: #2980b9;
+    }
+
+    .quantity-btn:disabled {
+      background: #bdc3c7;
+      cursor: not-allowed;
+    }
+
+    .quantity-value {
+      min-width: 40px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cart-item-actions {
+      text-align: right;
+    }
+
+    .cart-item-subtotal {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .remove-btn:hover {
+      background: #c0392b;
+    }
+
+    .cart-summary {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      position: sticky;
+      top: 2rem;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    .cart-summary-row.total {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2c3e50;
+      padding-top: 1rem;
+      border-top: 2px solid #ecf0f1;
+      margin-top: 1rem;
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn-checkout {
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-checkout:hover {
+      background: #229954;
+    }
+
+    .btn-clear {
+      background: transparent;
+      color: #e74c3c;
+      border: 2px solid #e74c3c;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-clear:hover {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .btn-continue {
+      background: transparent;
+      color: #3498db;
+      border: 2px solid #3498db;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-continue:hover {
+      background: #3498db;
+      color: white;
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 4rem 2rem;
+      font-size: 1.2rem;
+      color: #7f8c8d;
+    }
+
+    @media (max-width: 768px) {
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        gap: 1rem;
+      }
+
+      .cart-item-actions {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-summary {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#productos">Productos</a></li>
+        <li><a href="index.html#beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <a href="cart.html" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:inline-flex;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="cart-container">
+    <div class="cart-header">
+      <h1 style="font-size: 2.8rem; font-weight: 800;">
+        <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">🛒 Mi Carrito de Compras</span>
+      </h1>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-spinner">
+      <div>Cargando carrito...</div>
+    </div>
+
+    <!-- Empty Cart State -->
+    <div id="empty-cart" class="cart-empty" style="display: none;">
+      <div class="cart-empty-icon">🛒</div>
+      <h2>Tu carrito está vacío</h2>
+      <p>Agrega productos para comenzar a comprar</p>
+      <button class="btn-continue" onclick="window.location.href='index.html#productos'">
+        Explorar Productos
+      </button>
+    </div>
+
+    <!-- Cart with Items -->
+    <div id="cart-content" class="cart-layout" style="display: none;">
+      <!-- Cart Items List -->
+      <div>
+        <div id="cart-items" class="cart-items"></div>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <h2>Resumen del Pedido</h2>
+        <div class="cart-summary-row">
+          <span>Subtotal:</span>
+          <span id="summary-subtotal">$0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>IVA (16%):</span>
+          <span id="summary-tax">$0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Envío:</span>
+          <span id="summary-shipping">$0.00</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Total:</span>
+          <span id="summary-total">$0.00</span>
+        </div>
+
+        <div class="cart-actions">
+          <button class="btn-checkout" onclick="proceedToCheckout()">
+            Proceder al Pago
+          </button>
+          <button class="btn-continue" onclick="window.location.href='index.html#productos'">
+            Continuar Comprando
+          </button>
+          <button class="btn-clear" onclick="clearCartConfirm()">
+            Vaciar Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-include"></div>
+
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+  <script>
+    // Cargar y mostrar el carrito
+    async function loadCart() {
+      const loadingState = document.getElementById('loading-state');
+      const emptyCart = document.getElementById('empty-cart');
+      const cartContent = document.getElementById('cart-content');
+      const cartItemsContainer = document.getElementById('cart-items');
+
+      try {
+        // Verificar autenticación
+        if (!isAuthenticated()) {
+          showNotification('Debes iniciar sesión para ver tu carrito', 'error');
+          setTimeout(() => {
+            window.location.href = 'login.html?redirect=cart.html';
+          }, 1500);
+          return;
+        }
+
+        const cart = await getCart();
+
+        // Ocultar loading
+        loadingState.style.display = 'none';
+
+        // Si el carrito está vacío
+        if (!cart.items || cart.items.length === 0) {
+          emptyCart.style.display = 'block';
+          return;
+        }
+
+        // Mostrar carrito con items
+        cartContent.style.display = 'grid';
+        
+        // Agrupar items por vendedor
+        const itemsByVendor = groupByVendor(cart.items);
+        
+        // Renderizar items agrupados por vendedor
+        cartItemsContainer.innerHTML = '';
+        Object.keys(itemsByVendor).forEach(vendorId => {
+          const vendorSection = createVendorSection(itemsByVendor[vendorId]);
+          cartItemsContainer.appendChild(vendorSection);
+        });
+
+        // Actualizar resumen
+        updateCartSummary(cart);
+
+      } catch (error) {
+        console.error('Error al cargar el carrito:', error);
+        loadingState.style.display = 'none';
+        emptyCart.style.display = 'block';
+        showNotification(error.message || 'Error al cargar el carrito', 'error');
+      }
+    }
+
+    // Agrupar items por vendedor
+    function groupByVendor(items) {
+      const grouped = {};
+      items.forEach(item => {
+        const vendorId = item.producto?.vendedor?._id || item.producto?.owner?._id || 'unknown';
+        if (!grouped[vendorId]) {
+          grouped[vendorId] = {
+            vendorName: item.producto?.vendedor?.nombre || item.producto?.owner?.nombre || 'Vendedor Desconocido',
+            vendorId: vendorId,
+            items: []
+          };
+        }
+        grouped[vendorId].items.push(item);
+      });
+      return grouped;
+    }
+
+    // Crear sección de vendedor con sus productos
+    function createVendorSection(vendorData) {
+      const section = document.createElement('div');
+      section.className = 'vendor-section';
+      
+      const header = document.createElement('div');
+      header.className = 'vendor-header';
+      header.innerHTML = `
+        <div class="vendor-name">${vendorData.vendorName}</div>
+        <div class="vendor-actions">
+          <button onclick="makeOfferToVendor('${vendorData.vendorId}')">
+            <span>💰</span> Hacer Oferta
+          </button>
+          <button onclick="messageVendor('${vendorData.vendorId}')">
+            <span>💬</span> Contactar
+          </button>
+        </div>
+      `;
+      section.appendChild(header);
+
+      vendorData.items.forEach(item => {
+        const itemElement = createCartItemElement(item);
+        section.appendChild(itemElement);
+      });
+
+      return section;
+    }
+
+    // Crear elemento HTML para un item del carrito
+    function createCartItemElement(item) {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.setAttribute('data-item-id', item._id);
+
+      // Obtener imagen del producto (probar diferentes formatos)
+      let imageUrl = 'images/placeholder.jpg';
+      if (item.producto) {
+        const images = item.producto.imagenes || item.producto.images || [];
+        if (images.length > 0) {
+          const img = images[0];
+          // Si la imagen es una URL completa, usarla directamente
+          if (img.startsWith('http://') || img.startsWith('https://') || img.startsWith('//')) {
+            imageUrl = img;
+          } else if (img.startsWith('/')) {
+            // Si empieza con /, agregar el origen del servidor
+            imageUrl = 'http://localhost:4000' + img;
+          } else {
+            // Si es relativa, agregar el origen del servidor y /
+            imageUrl = 'http://localhost:4000/' + img;
+          }
+        }
+      }
+
+      const title = item.producto?.nombre || 'Producto';
+      const seller = item.producto?.vendedor?.nombre || item.producto?.owner?.nombre || 'Vendedor';
+      const price = item.precio || 0;
+      const quantity = item.cantidad || 1;
+      const subtotal = price * quantity;
+
+      div.innerHTML = `
+        <img src="${imageUrl}" alt="${title}" class="cart-item-image" onerror="this.src='images/placeholder.jpg'">
+        <div class="cart-item-details">
+          <div class="cart-item-title">${title}</div>
+          <div class="cart-item-seller">Vendedor: ${seller}</div>
+          <div class="cart-item-price">$${price.toFixed(2)}</div>
+          <div class="cart-item-quantity">
+            <button class="quantity-btn" onclick="updateQuantity('${item._id}', ${quantity - 1})" ${quantity <= 1 ? 'disabled' : ''}>−</button>
+            <span class="quantity-value">${quantity}</span>
+            <button class="quantity-btn" onclick="updateQuantity('${item._id}', ${quantity + 1})">+</button>
+          </div>
+        </div>
+        <div class="cart-item-actions">
+          <div class="cart-item-subtotal">$${subtotal.toFixed(2)}</div>
+          <button class="remove-btn" onclick="removeItem('${item._id}')">Eliminar</button>
+        </div>
+      `;
+
+      return div;
+    }
+
+    // Actualizar cantidad de un item
+    async function updateQuantity(itemId, newQuantity) {
+      if (newQuantity < 1) return;
+
+      try {
+        await updateCartItem(itemId, newQuantity);
+        showNotification('Cantidad actualizada', 'success');
+        await loadCart(); // Recargar el carrito
+      } catch (error) {
+        showNotification(error.message || 'Error al actualizar cantidad', 'error');
+      }
+    }
+
+    // Eliminar un item del carrito
+    async function removeItem(itemId) {
+      if (!confirm('¿Estás seguro de eliminar este producto del carrito?')) {
+        return;
+      }
+
+      try {
+        await removeCartItem(itemId);
+        showNotification('Producto eliminado del carrito', 'success');
+        await loadCart(); // Recargar el carrito
+      } catch (error) {
+        showNotification(error.message || 'Error al eliminar producto', 'error');
+      }
+    }
+
+    // Vaciar carrito con confirmación
+    async function clearCartConfirm() {
+      if (!confirm('¿Estás seguro de vaciar todo el carrito?')) {
+        return;
+      }
+
+      try {
+        await clearCart();
+        showNotification('Carrito vaciado', 'success');
+        await loadCart(); // Recargar el carrito
+      } catch (error) {
+        showNotification(error.message || 'Error al vaciar el carrito', 'error');
+      }
+    }
+
+    // Actualizar resumen del carrito
+    function updateCartSummary(cart) {
+      const subtotal = cart.total || 0;
+      const tax = subtotal * 0.16; // IVA 16%
+      const shipping = subtotal > 0 ? 50 : 0; // Envío fijo de $50 si hay productos
+      const total = subtotal + tax + shipping;
+
+      document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+      document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+      document.getElementById('summary-shipping').textContent = `$${shipping.toFixed(2)}`;
+      document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Hacer oferta a un vendedor por todos sus productos
+    async function makeOfferToVendor(vendorId) {
+      const monto = prompt('¿Cuánto quieres ofrecer por todos estos productos de este vendedor?');
+      if (!monto || isNaN(monto) || parseFloat(monto) <= 0) {
+        showNotification('Debes ingresar un monto válido', 'error');
+        return;
+      }
+
+      const mensaje = prompt('Mensaje para el vendedor (opcional):') || '';
+
+      try {
+        const response = await fetch('http://localhost:4000/api/ofertas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            vendedorId: vendorId,
+            monto: parseFloat(monto),
+            mensaje
+          })
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.msg || 'Error al enviar oferta');
+        }
+
+        showNotification('¡Oferta enviada al vendedor!', 'success');
+      } catch (error) {
+        console.error('Error al hacer oferta:', error);
+        showNotification(error.message || 'Error al enviar oferta', 'error');
+      }
+    }
+
+    // Enviar mensaje a un vendedor
+    async function messageVendor(vendorId) {
+      const mensaje = prompt('Escribe tu mensaje para el vendedor:');
+      if (!mensaje || mensaje.trim() === '') {
+        showNotification('Debes escribir un mensaje', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:4000/api/mensajes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destinatarioId: vendorId,
+            contenido: mensaje.trim()
+          })
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.msg || 'Error al enviar mensaje');
+        }
+
+        showNotification('¡Mensaje enviado!', 'success');
+      } catch (error) {
+        console.error('Error al enviar mensaje:', error);
+        showNotification(error.message || 'Error al enviar mensaje', 'error');
+      }
+    }
+
+    // Proceder al checkout
+    function proceedToCheckout() {
+      showNotification('Redirigiendo al checkout...', 'info');
+      setTimeout(() => {
+        window.location.href = 'checkout.html';
+      }, 1000);
+    }
+
+    // Cargar el carrito al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();
+    });
+  </script>
+</body>
+</html>

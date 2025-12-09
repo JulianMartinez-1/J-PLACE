@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Iniciar sesión — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+  <div class="login-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
+  <header class="header login-header">
+    <nav class="navbar">
+      <a href="index.html" class="logo"><span class="logo-text">J-PLACE</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth-page login-main">
+    <section class="auth-card login-card">
+      <div class="login-header-content">
+        <div class="login-icon">🔐</div>
+        <h1 data-i18n="auth.login.title">Bienvenido de vuelta</h1>
+        <p class="muted" data-i18n="auth.login.lead">Inicia sesión para continuar</p>
+      </div>
+
+      <form id="login-form" class="login-form">
+        <div class="form-row input-with-icon">
+          <label for="email" data-i18n="auth.login.email">Correo electrónico</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input id="email" name="email" type="email" required placeholder="tu@correo.com" />
+          </div>
+        </div>
+
+        <div class="form-row input-with-icon">
+          <label for="password" data-i18n="auth.login.password">Contraseña</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔑</span>
+            <input id="password" name="password" type="password" required placeholder="••••••••" />
+            <button type="button" class="toggle-password" id="toggle-password" title="Mostrar/ocultar contraseña">👁️</button>
+          </div>
+        </div>
+
+        <div class="form-actions login-actions">
+          <button type="submit" class="btn-primary login-submit" data-i18n="auth.login.submit">
+            <span class="btn-text">Iniciar sesión</span>
+            <span class="btn-loader hidden">⏳</span>
+          </button>
+        </div>
+      </form>
+
+      <div style="text-align: center; margin-top: 12px;">
+        <a href="forgot-password.html" style="color: #6366f1; text-decoration: none; font-size: 14px; font-weight: 500;">
+          ¿Olvidaste tu contraseña?
+        </a>
+      </div>
+
+      <div class="socials login-socials">
+        <div class="divider"><span>o continúa con</span></div>
+        <div class="social-buttons">
+          <button class="btn-social google" disabled title="Próximamente"><img src="images/google.svg" alt="Google" class="social-icon"> Google</button>
+          <button class="btn-social facebook" disabled title="Próximamente"><img src="images/facebook.svg" alt="Facebook" class="social-icon"> Facebook</button>
+        </div>
+      </div>
+
+      <p class="small">¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+
+      <p id="login-feedback" class="newsletter-feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 MarketPlace Global - Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    // Toggle password visibility
+    (function(){
+      const toggleBtn = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password');
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener('click', () => {
+          const type = passwordInput.type === 'password' ? 'text' : 'password';
+          passwordInput.type = type;
+          toggleBtn.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+      }
+    })();
+
+    // Login mejorado: timeout, mensajes claros y guardar token + user en localStorage
+    (function () {
+      const loginForm = document.getElementById('login-form');
+      const loginFeedback = document.getElementById('login-feedback');
+      const submitBtn = loginForm.querySelector('.login-submit');
+      const btnText = submitBtn.querySelector('.btn-text');
+      const btnLoader = submitBtn.querySelector('.btn-loader');
+      const API = 'http://localhost:4000/api/auth/login';
+      const TIMEOUT_MS = 8000;
+
+      // Nota: ya no existe flujo de aprobación por admin; los usuarios pueden iniciar sesión tras registrarse.
+
+      function showError(msg) {
+        loginFeedback.style.color = 'crimson';
+        loginFeedback.textContent = msg;
+      }
+
+      loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        loginFeedback.textContent = '';
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+          showError('Por favor completa ambos campos.');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        btnText.style.opacity = '0';  
+        btnLoader.classList.remove('hidden');
+
+        // AbortController para timeout
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+        try {
+          const res = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+            signal: controller.signal,
+          });
+
+          clearTimeout(id);
+          const data = await res.json().catch(() => ({}));
+          submitBtn.disabled = false;
+          btnText.style.opacity = '1';
+          btnLoader.classList.add('hidden');
+
+          if (res.ok) {
+            // Guardar token y user
+            console.log('✅ Login exitoso - Datos recibidos:', data);
+            console.log('Token recibido:', data.token);
+            console.log('Usuario recibido:', data.user);
+            
+            if (data.token) {
+              localStorage.setItem('jplace_token', data.token);
+              console.log('✅ Token guardado en localStorage');
+            }
+            const user = data.user || { email };
+            localStorage.setItem('jplace_user', JSON.stringify(user));
+            console.log('✅ Usuario guardado en localStorage:', user);
+            console.log('✅ Rol del usuario:', user.role);
+
+            loginFeedback.style.color = 'var(--primary-dark)';
+            loginFeedback.textContent = 'Inicio correcto. Redirigiendo...';
+            
+            // Siempre redirigir al index, sin importar el rol
+            console.log('✅ Login exitoso, redirigiendo al inicio...');
+            setTimeout(() => (window.location.href = 'index.html'), 700);
+            return;
+          }
+
+          // Mensaje más útil según código
+          if (res.status === 400) {
+            showError(data.msg || 'Credenciales incorrectas.');
+          } else if (res.status >= 500) {
+            showError('Error interno del servidor. Intenta más tarde.');
+          } else {
+            showError(data.msg || 'Error al iniciar sesión');
+          }
+        } catch (err) {
+          submitBtn.disabled = false;
+          btnText.style.opacity = '1';
+          btnLoader.classList.add('hidden');
+          if (err.name === 'AbortError') {
+            showError('La petición tardó demasiado. Verifica el servidor y vuelve a intentar.');
+          } else {
+            showError('No fue posible conectar con el servidor. ¿Está corriendo en http://localhost:4000 ?');
+            console.error('Login fetch error:', err);
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J-PLACE | Tu Marketplace de Confianza</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <meta name="description" content="J-PLACE - Compra y vende fácilmente. Descubre tecnología, moda, hogar y deportes con recomendaciones inteligentes y pagos seguros." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="J-PLACE | Tu Marketplace de Confianza" />
+  <meta property="og:description" content="Compra y vende fácilmente. Recomendaciones inteligentes y pagos seguros." />
+  <meta property="og:image" content="images/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tu-dominio.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- JSON-LD básico -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "J-PLACE",
+    "url": "https://tu-dominio.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://tu-dominio.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="#inicio" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <!-- Área de usuario / avatar: se muestra si hay sesión -->
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <!-- Carrito: solo visible cuando hay sesión iniciada -->
+        <a href="cart.html" id="cart-icon" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:none;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="inicio" class="hero hero-enhanced">
+    <!-- Carrusel simplificado -->
+    <div class="carousel" id="heroCarousel" aria-label="Carrusel de imágenes">
+      <div class="carousel-track">
+        <div class="carousel-slide active">
+          <img src="images/slide1.jpg" alt="Ofertas en tecnología" />
+          <div class="slide-overlay"></div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/slide2.jpg" alt="Moda y accesorios" />
+          <div class="slide-overlay"></div>
+        </div>
+        <div class="carousel-slide">
+          <img src="images/slide3.jpg" alt="Decoración para el hogar" />
+          <div class="slide-overlay"></div>
+        </div>
+      </div>
+      <!-- Controles del carrusel -->
+      <button class="carousel-control prev" aria-label="Anterior">
+        <span>‹</span>
+      </button>
+      <button class="carousel-control next" aria-label="Siguiente">
+        <span>›</span>
+      </button>
+      <div class="carousel-indicators" role="tablist" aria-label="Indicadores del carrusel"></div>
+    </div>
+
+    <!-- Contenido principal simplificado -->
+    <div class="hero-content hero-content-enhanced">
+      <h1 class="hero-title-mega animate-fade-in-up" data-i18n="hero.title">
+        Compra y vende con <span class="text-gradient">confianza</span>
+      </h1>
+      <p class="lead-enhanced animate-fade-in-up" style="animation-delay: 0.2s" data-i18n="hero.lead">
+        Tu marketplace de confianza. Miles de productos al mejor precio.
+      </p>
+      
+      <!-- CTA simplificados -->
+      <div class="hero-cta animate-fade-in-up" style="animation-delay: 0.4s">
+        <a href="#productos" class="btn-hero-primary" data-i18n="hero.explore">
+          Explorar categorías
+        </a>
+        <button class="btn-hero-secondary register-placeholder" data-i18n="hero.register">
+          Regístrate gratis
+        </button>
+      </div>
+
+      <!-- Trust badges simplificados -->
+      <div class="trust-badges trust-badges-enhanced animate-fade-in-up" style="animation-delay: 0.6s">
+        <div class="trust-badge">
+          <span class="trust-icon">🚚</span>
+          <strong data-i18n="trust.t1">Envíos rápidos</strong>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-icon">🔒</span>
+          <strong data-i18n="trust.t2">Pagos seguros</strong>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-icon">⭐</span>
+          <strong data-i18n="trust.t3">Soporte 24/7</strong>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección Cómo Funciona -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">🚀 Proceso</div>
+        <h2 data-i18n="howitworks.title">Comprar es <span class="text-gradient">súper fácil</span></h2>
+        <p class="section-subtitle" data-i18n="howitworks.subtitle">Solo 3 pasos para tu primera compra</p>
+      </div>
+
+      <div class="steps-timeline">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon">🔍</div>
+          <h3 data-i18n="howitworks.step1.title">Explora</h3>
+          <p data-i18n="howitworks.step1.desc">Busca entre miles de productos en 18 categorías</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon">🛒</div>
+          <h3 data-i18n="howitworks.step2.title">Agrega al carrito</h3>
+          <p data-i18n="howitworks.step2.desc">Selecciona lo que te gusta y revisa tu pedido</p>
+        </div>
+
+        <div class="step-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dot"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon">📦</div>
+          <h3 data-i18n="howitworks.step3.title">Recibe en casa</h3>
+          <p data-i18n="howitworks.step3.desc">Pago seguro y envío rápido a tu puerta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="testimonials testimonials-carousel" aria-label="Testimonios de usuarios">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">💬 Testimonios</div>
+        <h2 data-i18n="testimonials.title">Lo que dicen <span class="text-gradient">nuestros usuarios</span></h2>
+        <p class="section-subtitle" data-i18n="testimonials.subtitle">Más de 15,000 clientes satisfechos</p>
+      </div>
+
+      <div class="testimonials-slider">
+        <div class="testimonials-track">
+          <article class="testimonial-card-enhanced">
+            <div class="testimonial-header">
+              <div class="testimonial-stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="testimonial-date" data-i18n="testimonials.date1">Hace 2 días</span>
+            </div>
+            <p class="testimonial-text" data-i18n="testimonials.t1">
+              "Encontré un teléfono en perfecto estado por un precio increíble. 
+              El proceso fue rápido y el vendedor muy amable."
+            </p>
+            <div class="testimonial-footer">
+              <div class="author-avatar-large">
+                <div class="avatar-placeholder">M</div>
+                <span class="verified-badge" title="Usuario verificado">✓</span>
+              </div>
+              <div class="author-details">
+                <strong class="author-name">María González</strong>
+                <span class="author-location">📍 <span data-i18n="testimonials.a1">Bogotá</span></span>
+                <span class="author-purchases">🛍️ <span data-i18n="testimonials.purchases1">12 compras</span></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card-enhanced">
+            <div class="testimonial-header">
+              <div class="testimonial-stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="testimonial-date" data-i18n="testimonials.date2">Hace 5 días</span>
+            </div>
+            <p class="testimonial-text" data-i18n="testimonials.t2">
+              "Vender mis muebles aquí fue sencillo. Las herramientas de publicación 
+              son claras y recibí ofertas en horas."
+            </p>
+            <div class="testimonial-footer">
+              <div class="author-avatar-large">
+                <div class="avatar-placeholder">A</div>
+                <span class="verified-badge" title="Usuario verificado">✓</span>
+              </div>
+              <div class="author-details">
+                <strong class="author-name">Andrés López</strong>
+                <span class="author-location">📍 <span data-i18n="testimonials.a2">Medellín</span></span>
+                <span class="author-purchases">🛍️ <span data-i18n="testimonials.purchases2">8 ventas</span></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial-card-enhanced">
+            <div class="testimonial-header">
+              <div class="testimonial-stars">
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+                <span class="star filled">★</span>
+              </div>
+              <span class="testimonial-date" data-i18n="testimonials.date3">Hace 1 semana</span>
+            </div>
+            <p class="testimonial-text" data-i18n="testimonials.t3">
+              "La atención al cliente me ayudó con una devolución. Excelente soporte 
+              y experiencia segura."
+            </p>
+            <div class="testimonial-footer">
+              <div class="author-avatar-large">
+                <div class="avatar-placeholder">C</div>
+                <span class="verified-badge" title="Usuario verificado">✓</span>
+              </div>
+              <div class="author-details">
+                <strong class="author-name">Camila Torres</strong>
+                <span class="author-location">📍 <span data-i18n="testimonials.a3">Cali</span></span>
+                <span class="author-purchases">🛍️ <span data-i18n="testimonials.purchases3">15 compras</span></span>
+              </div>
+            </div>
+          </article>
+        </div>
+        
+        <!-- Controles del slider -->
+        <div class="slider-controls">
+          <button class="slider-btn prev" aria-label="Testimonio anterior">‹</button>
+          <div class="slider-dots"></div>
+          <button class="slider-btn next" aria-label="Siguiente testimonio">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter / suscripción simple (frontend only) -->
+  <section class="newsletter newsletter-premium" aria-label="Suscríbete al boletín">
+    <div class="newsletter-background">
+      <div class="newsletter-pattern"></div>
+      <div class="newsletter-glow"></div>
+    </div>
+    
+    <div class="container">
+      <div class="newsletter-wrapper">
+        <div class="newsletter-visual">
+          <div class="newsletter-icon-large">
+            <span class="icon-pulse">📧</span>
+          </div>
+        </div>
+
+        <div class="newsletter-content-premium">
+          <div class="newsletter-badge">🎁 <span data-i18n="newsletter.badge">Oferta especial</span></div>
+          <h2 data-i18n="newsletter.title">¡No te pierdas nada!</h2>
+          <p class="newsletter-subtitle" data-i18n="newsletter.p">
+            Suscríbete y recibe <strong class="highlight">10% de descuento</strong> 
+            en tu primera compra
+          </p>
+
+          <ul class="newsletter-benefits-list">
+            <li><span class="check-icon">✓</span> <span data-i18n="newsletter.benefit1">Ofertas exclusivas semanales</span></li>
+            <li><span class="check-icon">✓</span> <span data-i18n="newsletter.benefit2">Acceso anticipado a nuevos productos</span></li>
+            <li><span class="check-icon">✓</span> <span data-i18n="newsletter.benefit3">Consejos y guías de compra</span></li>
+            <li><span class="check-icon">✓</span> <span data-i18n="newsletter.benefit4">Cero spam, cancela cuando quieras</span></li>
+          </ul>
+
+          <form id="newsletter-form" class="newsletter-form-premium" aria-label="Formulario de suscripción">
+            <div class="form-group-inline">
+              <div class="input-with-icon">
+                <span class="input-icon">✉️</span>
+                <input 
+                  type="email" 
+                  id="newsletter-email"
+                  placeholder="tu@correo.com" 
+                  required 
+                  class="input-premium"
+                  aria-label="Correo electrónico"
+                  data-i18n-placeholder="newsletter.placeholder"
+                />
+              </div>
+              <button type="submit" class="btn-newsletter-premium" data-i18n="newsletter.btn">
+                <span>Suscribirme</span>
+                <span class="btn-shine"></span>
+              </button>
+            </div>
+          </form>
+
+          <p class="newsletter-privacy">
+            🔒 <span data-i18n="newsletter.privacy">Tus datos están seguros. Lee nuestra <a href="#">política de privacidad</a></span>
+          </p>
+          <p id="newsletter-feedback" role="status" aria-live="polite" class="newsletter-feedback"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos" class="productos productos-showcase">
+    <div class="container">
+      <div class="section-header section-header-enhanced">
+        <div class="section-badge">🛍️ <span data-i18n="productos.badge">Descubre</span></div>
+        <h2 class="section-title-large" data-i18n="productos.title">
+          Explora <span class="text-gradient">categorías</span> populares
+        </h2>
+        <p class="section-subtitle" data-i18n="productos.subtitle">
+          Miles de productos en las categorías más buscadas
+        </p>
+        
+        <!-- Filtro de vista -->
+        <div class="view-switcher">
+          <button class="view-btn active" data-view="grid" aria-label="Vista de cuadrícula">
+            <span>▦</span> <span data-i18n="productos.grid">Grid</span>
+          </button>
+          <button class="view-btn" data-view="list" aria-label="Vista de lista">
+            <span>☰</span> <span data-i18n="productos.list">Lista</span>
+          </button>
+        </div>
+      </div>
+      <div class="productos-grid-showcase">
+        <!-- Categoría destacada (grande) -->
+        <a href="tecnologia.html" class="category-card" aria-label="Ver productos de Tecnología">
+          <div class="category-image-wrapper">
+            <img src="images/54TDYNQK7ZIXZGIWJ7ICAV4U4E.jpg" alt="Tecnología" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3 data-i18n="productos.tecnologia">Tecnología</h3>
+            <span class="category-count" data-i18n="productos.tecnologia_count">2,458 productos</span>
+          </div>
+        </a>
+
+        <!-- Categorías normales con hover mejorado -->
+        <a href="moda.html" class="category-card" aria-label="Ver productos de Moda">
+          <div class="category-image-wrapper">
+            <img src="images/moda-para-hombre-prendas-calzado-ropa-complementos-accesorios-4.jpg" alt="Moda" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3 data-i18n="productos.moda">Moda</h3>
+            <span class="category-count" data-i18n="productos.moda_count">1,890 productos</span>
+          </div>
+        </a>
+
+        <a href="hogar.html" class="category-card" aria-label="Ver productos de Hogar">
+          <div class="category-image-wrapper">
+            <img src="images/images.jpg" alt="Hogar" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3 data-i18n="productos.hogar">Hogar</h3>
+            <span class="category-count" data-i18n="productos.hogar_count">1,567 productos</span>
+          </div>
+        </a>
+
+        <a href="deportes.html" class="category-card" aria-label="Ver productos de Deportes">
+          <div class="category-image-wrapper">
+            <img src="images/deportes.jpg" alt="Deportes" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3 data-i18n="productos_extra.deportes">Deportes</h3>
+            <span class="category-count" data-i18n="productos.deportes_count">1,234 productos</span>
+          </div>
+        </a>
+
+        <a href="electronica.html" class="category-card" aria-label="Ver productos de Electrónica">
+          <div class="category-image-wrapper">
+            <img src="images/electronica card.jpg" alt="Electrónica" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Electrónica</h3>
+            <span class="category-count">890 productos</span>
+          </div>
+        </a>
+
+        <a href="juguetes.html" class="category-card" aria-label="Ver productos de Juguetes">
+          <div class="category-image-wrapper">
+            <img src="images/juguetes card.jpg" alt="Juguetes" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Juguetes</h3>
+            <span class="category-count">1,045 productos</span>
+          </div>
+        </a>
+
+        <a href="herramientas.html" class="category-card" aria-label="Ver productos de Herramientas">
+          <div class="category-image-wrapper">
+            <img src="images/herramientas card.jpg" alt="Herramientas" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Herramientas</h3>
+            <span class="category-count">756 productos</span>
+          </div>
+        </a>
+
+        <a href="libros.html" class="category-card" aria-label="Ver productos de Libros">
+          <div class="category-image-wrapper">
+            <img src="images/libros card.avif" alt="Libros" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Libros</h3>
+            <span class="category-count">1,678 productos</span>
+          </div>
+        </a>
+
+        <a href="electrodomesticos.html" class="category-card" aria-label="Ver productos de Electrodomésticos">
+          <div class="category-image-wrapper">
+            <img src="images/electrodomesticos card.webp" alt="Electrodomésticos" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Electrodomésticos</h3>
+            <span class="category-count">934 productos</span>
+          </div>
+        </a>
+
+        <a href="belleza.html" class="category-card" aria-label="Ver productos de Belleza">
+          <div class="category-image-wrapper">
+            <img src="images/belleza card.jpg" alt="Belleza" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Belleza</h3>
+            <span class="category-count">1,345 productos</span>
+          </div>
+        </a>
+
+        <a href="musica.html" class="category-card" aria-label="Ver productos de Música">
+          <div class="category-image-wrapper">
+            <img src="images/musica card.jpg" alt="Música" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Música</h3>
+            <span class="category-count">567 productos</span>
+          </div>
+        </a>
+
+        <a href="mascotas.html" class="category-card" aria-label="Ver productos de Mascotas">
+          <div class="category-image-wrapper">
+            <img src="images/mascotas card.jpg" alt="Mascotas" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Mascotas</h3>
+            <span class="category-count">823 productos</span>
+          </div>
+        </a>
+
+        <a href="jardin.html" class="category-card" aria-label="Ver productos de Jardín">
+          <div class="category-image-wrapper">
+            <img src="images/jardin card.jpg" alt="Jardín" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Jardín</h3>
+            <span class="category-count">612 productos</span>
+          </div>
+        </a>
+
+        <a href="alimentos.html" class="category-card" aria-label="Ver productos de Alimentos">
+          <div class="category-image-wrapper">
+            <img src="images/alimentos card.webp" alt="Alimentos" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Alimentos</h3>
+            <span class="category-count">1,456 productos</span>
+          </div>
+        </a>
+
+        <a href="automoviles.html" class="category-card" aria-label="Ver productos de Automóviles">
+          <div class="category-image-wrapper">
+            <img src="images/automoviles card.webp" alt="Automóviles" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Automóviles</h3>
+            <span class="category-count">987 productos</span>
+          </div>
+        </a>
+
+        <a href="arte.html" class="category-card" aria-label="Ver productos de Arte">
+          <div class="category-image-wrapper">
+            <img src="images/arte card.jpg" alt="Arte" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Arte</h3>
+            <span class="category-count">534 productos</span>
+          </div>
+        </a>
+
+        <a href="fotografia.html" class="category-card" aria-label="Ver productos de Fotografía">
+          <div class="category-image-wrapper">
+            <img src="images/fotografia card.jpg" alt="Fotografía" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Fotografía</h3>
+            <span class="category-count">701 productos</span>
+          </div>
+        </a>
+
+        <a href="oficina.html" class="category-card" aria-label="Ver productos de Oficina">
+          <div class="category-image-wrapper">
+            <img src="images/oficina card.webp" alt="Oficina" />
+            <div class="category-quick-view">
+              <span data-i18n="productos.view">Ver productos →</span>
+            </div>
+          </div>
+          <div class="category-info">
+            <h3>Oficina</h3>
+            <span class="category-count">1,112 productos</span>
+          </div>
+        </a>
+    </div>
+  </section>
+
+  <section id="beneficios" class="beneficios beneficios-interactive">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">🌟 <span data-i18n="benefits.badge">Ventajas</span></div>
+        <h2 data-i18n="benefits.title">¿Por qué <span class="text-gradient">elegirnos</span>?</h2>
+        <p class="section-subtitle" data-i18n="benefits.subtitle">
+          Más de 15,000 usuarios confían en nosotros
+        </p>
+      </div>
+
+      <div class="benefits-grid-enhanced">
+        <div class="benefit-card-interactive">
+          <div class="benefit-icon-wrapper">
+            <div class="benefit-icon-bg"></div>
+            <span class="benefit-icon-large">🧠</span>
+          </div>
+          <div class="benefit-content">
+            <h3 data-i18n="benefits.b1h">Recomendaciones IA</h3>
+            <p data-i18n="benefits.b1p">
+              Nuestro algoritmo aprende de tus preferencias y te muestra 
+              productos que realmente te interesan.
+            </p>
+            <ul class="benefit-features">
+              <li data-i18n="benefits.b1f1">✓ Personalización en tiempo real</li>
+              <li data-i18n="benefits.b1f2">✓ Predicción de gustos</li>
+              <li data-i18n="benefits.b1f3">✓ Alertas inteligentes</li>
+            </ul>
+          </div>
+          <div class="benefit-number">01</div>
+        </div>
+
+        <div class="benefit-card-interactive">
+          <div class="benefit-icon-wrapper">
+            <div class="benefit-icon-bg"></div>
+            <span class="benefit-icon-large">🚀</span>
+          </div>
+          <div class="benefit-content">
+            <h3 data-i18n="benefits.b2h">Vende fácil y rápido</h3>
+            <p data-i18n="benefits.b2p">
+              Publica tus productos en minutos y llega a miles de 
+              compradores potenciales.
+            </p>
+            <ul class="benefit-features">
+              <li data-i18n="benefits.b2f1">✓ Publicación en 3 minutos</li>
+              <li data-i18n="benefits.b2f2">✓ Herramientas de promoción</li>
+              <li data-i18n="benefits.b2f3">✓ Dashboard completo</li>
+            </ul>
+          </div>
+          <div class="benefit-number">02</div>
+        </div>
+
+        <div class="benefit-card-interactive">
+          <div class="benefit-icon-wrapper">
+            <div class="benefit-icon-bg"></div>
+            <span class="benefit-icon-large">💳</span>
+          </div>
+          <div class="benefit-content">
+            <h3 data-i18n="benefits.b3h">Pagos seguros</h3>
+            <p data-i18n="benefits.b3p">
+              Compra con tranquilidad gracias a nuestro sistema de 
+              protección y soporte 24/7.
+            </p>
+            <ul class="benefit-features">
+              <li data-i18n="benefits.b3f1">✓ Encriptación SSL 256-bit</li>
+              <li data-i18n="benefits.b3f2">✓ Protección al comprador</li>
+              <li data-i18n="benefits.b3f3">✓ Múltiples métodos de pago</li>
+            </ul>
+          </div>
+          <div class="benefit-number">03</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-include"></div>
+
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

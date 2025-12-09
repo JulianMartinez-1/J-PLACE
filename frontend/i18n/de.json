@@ -1,0 +1,19 @@
+{
+  "nav": { "inicio": "Startseite", "productos": "Produkte", "beneficios": "Vorteile", "contacto": "Kontakt", "register": "Registrieren" },
+  "hero": { "title": "Personalisierte Empfehlungen anzeigen", "lead": "Finden Sie einzigartige Produkte und personalisierte Empfehlungen. Listen Sie Artikel in Minuten und erreichen Sie echte Käufer.", "explore": "Kategorien erkunden", "register": "Registrieren" },
+  "trust": { "t1": "🚚 Schneller Versand", "t2": "🔒 Sichere Zahlungen", "t3": "⭐ 24/7 Support" },
+  "testimonials": { "title": "Was unsere Nutzer sagen", "t1": "Ich habe ein Telefon in perfektem Zustand zu einem erstaunlichen Preis gefunden. Der Prozess war schnell und der Verkäufer war sehr freundlich.", "a1": "- Maria, Bogotá", "t2": "Den Verkauf meiner Möbel hier fand ich einfach. Die Tools sind klar und ich erhielt innerhalb von Stunden Angebote.", "a2": "- Andrés, Medellín", "t3": "Der Kundenservice half mir bei einer Rücksendung. Ausgezeichneter Support und sichere Erfahrung.", "a3": "- Camila, Cali" },
+  "newsletter": { "title": "Exklusive Angebote erhalten", "p": "Abonnieren Sie unseren Newsletter und erhalten Sie 10% Rabatt auf Ihren ersten Einkauf.", "placeholder": "du@beispiel.de", "btn": "Abonnieren", "thankyou": "Danke! Wir haben eine Bestätigungs-E-Mail gesendet (simuliert)." },
+  "productos": { "title": "Beliebte Kategorien entdecken" },
+  "productos_extra": { "deportes": "Sport" },
+  "category": {
+    "moda": { "title": "Mode", "lead": "Kollektionen, Kleidungsstücke und Accessoires für Sie ausgewählt." },
+    "tecnologia": { "title": "Technologie", "lead": "Entdecken Sie die neuesten Gadgets, Elektronik und Zubehör." },
+    "deportes": { "title": "Sport", "lead": "Sportausrüstung und Zubehör für alle Levels." },
+    "hogar": { "title": "Zuhause", "lead": "Finden Sie Möbel, Dekoration und Lösungen für Ihr Zuhause." }
+  },
+  "benefits": { "title": "Warum uns wählen?", "b1h": "Intelligente Empfehlungen", "b1p": "Unser System lernt aus Ihren Vorlieben und zeigt Ihnen, was wirklich wichtig ist.", "b2h": "Einfach und schnell verkaufen", "b2p": "Listen Sie Ihre Produkte in Minuten und erreichen Sie tausende potenzielle Käufer.", "b3h": "Sichere Zahlungen", "b3p": "Kaufen Sie mit ruhigem Gewissen dank unseres Schutzsystems und 24/7 Support" },
+  "footer": { "ctaTitle": "Personalisierte Empfehlungen anzeigen", "ctaButton": "Anmelden", "smallCta": "Neukunde? <a href=\"registro.html\">Hier beginnen.</a>", "cols": ["Über uns","Verdienen Sie Geld mit uns","Zahlungsprodukte","Wir können helfen"], "helpLinks": ["Ihr Konto","Ihre Bestellungen","Rücksendungen","Hilfe"] },
+  "auth": { "register": { "title": "Konto erstellen", "lead": "Registrieren Sie sich, um auf J-PLACE zu kaufen und zu verkaufen", "name": "Vollständiger Name", "email": "E-Mail", "password": "Passwort", "submit": "Registrieren" }, "login": { "title": "Anmelden", "lead": "Verwenden Sie Ihre E-Mail und Ihr Passwort zum Anmelden", "email": "E-Mail", "password": "Passwort", "submit": "Anmelden" } },
+  "misc": { "loadMore": "Mehr laden" }
+}

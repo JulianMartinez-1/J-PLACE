@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Salud — J-PLACE</title>
+  <link rel="icon" href="images/J-PLACE.png"type="image/png"> 
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <span class="logo-text">J-PLACE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" data-i18n="nav.inicio">Inicio</a></li>
+        <li><a href="index.html#productos" data-i18n="nav.productos">Productos</a></li>
+        <li><a href="index.html#beneficios" data-i18n="nav.beneficios">Beneficios</a></li>
+        <li><a href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+      </ul>
+      <div id="user-area" style="display:flex;align-items:center;gap:0.6rem">
+        <a href="cart.html" class="cart-icon-link" title="Mi Carrito" style="position:relative;display:inline-flex;align-items:center;text-decoration:none;color:#333;font-size:1.5rem;padding:0.5rem">
+          🛒
+          <span id="cart-count" style="position:absolute;top:0;right:0;background:#ff4757;color:white;border-radius:50%;width:20px;height:20px;display:none;align-items:center;justify-content:center;font-size:0.7rem;font-weight:bold">0</span>
+        </a>
+        <a href="registro.html" class="btn-primary user-register-link" data-i18n="nav.register">Regístrate</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="category-hero" data-category="salud" style="background-image: url('images/salud.avif');">
+    <div class="hero-inner">
+      <h1>Salud</h1>
+      <p>Bienestar, suplementos y equipos para una vida saludable.</p>
+    </div>
+  </section>
+
+  <div class="filters">
+    <button class="filter-btn">Más populares</button>
+    <button class="filter-btn">Precio: bajo → alto</button>
+    <button class="filter-btn">Nuevos</button>
+  </div>
+
+  <section class="products-grid" aria-label="Productos de salud">
+    <a class="product-card" href="#" data-subcategory="suplementos">
+      <img src="images/salud.avif" alt="Proteína en polvo" />
+      <div class="card-body">
+        <h4>Proteína Whey 2kg</h4>
+        <p>Suplemento proteico de alta calidad para desarrollo muscular.</p>
+        <div class="price">$79.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="fitness">
+      <img src="images/salud.avif" alt="Pesas ajustables" />
+      <div class="card-body">
+        <h4>Set de Pesas Ajustables</h4>
+        <p>Mancuernas con peso variable de 2.5kg a 12.5kg por lado.</p>
+        <div class="price">$149.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="monitoreo">
+      <img src="images/salud.avif" alt="Monitor de presión" />
+      <div class="card-body">
+        <h4>Monitor de Presión Digital</h4>
+        <p>Medición precisa con memoria para múltiples usuarios.</p>
+        <div class="price">$64.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="yoga">
+      <img src="images/salud.avif" alt="Mat de yoga" />
+      <div class="card-body">
+        <h4>Mat de Yoga Antideslizante</h4>
+        <p>Estera premium con grosor de 6mm y bolso de transporte.</p>
+        <div class="price">$44.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="suplementos">
+      <img src="images/salud.avif" alt="Multivitamínico" />
+      <div class="card-body">
+        <h4>Multivitamínico Completo</h4>
+        <p>90 cápsulas con vitaminas y minerales esenciales.</p>
+        <div class="price">$34.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="fitness">
+      <img src="images/salud.avif" alt="Banda elástica" />
+      <div class="card-body">
+        <h4>Set de Bandas Elásticas</h4>
+        <p>5 niveles de resistencia para entrenamiento completo.</p>
+        <div class="price">$29.00</div>
+      </div>
+    </a>
+    <a class="product-card" href="#" data-subcategory="monitoreo">
+      <img src="images/salud.avif" alt="Báscula inteligente" />
+      <div class="card-body">
+        <h4>Báscula Inteligente Bluetooth</h4>
+        <p>Mide peso, grasa corporal, masa muscular y más.</p>
+        <div class="price">$89.00</div>
+      </div>
+    </a>
+  </section>
+
+  <div style="text-align:center; padding:1rem 0;">
+    <button class="load-more" data-i18n="misc.loadMore">Cargar más</button>
+  </div>
+
+  <div id="footer-include"></div>
+  <script src="cart.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

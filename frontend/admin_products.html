@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Productos Reportados - J-PLACE</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <a class="logo" href="index.html"><span class="logo-text">J-PLACE</span></a>
+      <div id="user-area"></div>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h2>👑 Admin Panel</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin_dashboard.html" class="nav-item">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Dashboard</span>
+        </a>
+        <a href="admin_users.html" class="nav-item">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label">Usuarios</span>
+        </a>
+        <a href="admin_products.html" class="nav-item active">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Productos Reportados</span>
+        </a>
+        <a href="admin_sellers.html" class="nav-item">
+          <span class="nav-icon">🏪</span>
+          <span class="nav-label">Vendedores</span>
+        </a>
+        <a href="admin_categories.html" class="nav-item">
+          <span class="nav-icon">🏷️</span>
+          <span class="nav-label">Categorías</span>
+        </a>
+        <a href="admin_commissions.html" class="nav-item">
+          <span class="nav-icon">💰</span>
+          <span class="nav-label">Comisiones</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-page-header">
+        <div>
+          <h1>📦 Gestión de Productos Reportados</h1>
+          <p class="page-subtitle">Revisa y gestiona productos reportados por usuarios</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-primary" onclick="location.reload()">🔄 Actualizar</button>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <section class="filters-bar">
+        <input type="search" id="searchReports" placeholder="Buscar por producto o usuario..." class="search-input">
+        <select id="reasonFilter" class="filter-select">
+          <option value="">Todos los motivos</option>
+          <option value="spam">Spam</option>
+          <option value="fraud">Fraude</option>
+          <option value="inappropriate">Contenido inapropiado</option>
+          <option value="fake">Producto falso</option>
+          <option value="other">Otro</option>
+        </select>
+        <select id="statusFilter" class="filter-select">
+          <option value="pending">Pendientes</option>
+          <option value="reviewed">Revisados</option>
+          <option value="all">Todos</option>
+        </select>
+      </section>
+
+      <!-- Reports List -->
+      <section class="reports-section">
+        <div id="reportsList" class="reports-list">
+          <!-- Sample report cards -->
+          <div class="report-card">
+            <div class="report-header">
+              <div class="report-status pending">⏳ Pendiente</div>
+              <div class="report-date">Hace 2 horas</div>
+            </div>
+            <div class="report-content">
+              <div class="report-product">
+                <img src="images/monitores.avif" alt="Producto" class="product-thumb">
+                <div class="product-info">
+                  <h3>Monitor Samsung 24" Full HD</h3>
+                  <div class="product-meta">
+                    <span>Tecnología</span> • <span>$3,499</span>
+                  </div>
+                  <div class="product-seller">Vendedor: TechStore123</div>
+                </div>
+              </div>
+              <div class="report-details">
+                <div class="report-reason">
+                  <strong>Motivo:</strong> Contenido inapropiado
+                </div>
+                <div class="report-description">
+                  La descripción del producto contiene información engañosa sobre las especificaciones técnicas del monitor.
+                </div>
+                <div class="report-reporter">
+                  <strong>Reportado por:</strong> usuario_activo_123
+                </div>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn-success" onclick="handleReport('dismiss', '1')">✓ Desestimar</button>
+              <button class="btn-warning" onclick="handleReport('warn', '1')">⚠️ Advertir</button>
+              <button class="btn-danger" onclick="handleReport('remove', '1')">🗑️ Eliminar Producto</button>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-header">
+              <div class="report-status pending">⏳ Pendiente</div>
+              <div class="report-date">Hace 5 horas</div>
+            </div>
+            <div class="report-content">
+              <div class="report-product">
+                <img src="images/libros card.avif" alt="Producto" class="product-thumb">
+                <div class="product-info">
+                  <h3>Libro "El Arte de Programar"</h3>
+                  <div class="product-meta">
+                    <span>Libros</span> • <span>$599</span>
+                  </div>
+                  <div class="product-seller">Vendedor: LibrosOnline</div>
+                </div>
+              </div>
+              <div class="report-details">
+                <div class="report-reason">
+                  <strong>Motivo:</strong> Spam
+                </div>
+                <div class="report-description">
+                  El vendedor ha publicado el mismo producto múltiples veces con ligeras variaciones en el título.
+                </div>
+                <div class="report-reporter">
+                  <strong>Reportado por:</strong> comprador_verificado
+                </div>
+              </div>
+            </div>
+            <div class="report-actions">
+              <button class="btn-success" onclick="handleReport('dismiss', '2')">✓ Desestimar</button>
+              <button class="btn-warning" onclick="handleReport('warn', '2')">⚠️ Advertir</button>
+              <button class="btn-danger" onclick="handleReport('remove', '2')">🗑️ Eliminar Producto</button>
+            </div>
+          </div>
+
+          <div class="report-card reviewed">
+            <div class="report-header">
+              <div class="report-status reviewed">✓ Revisado</div>
+              <div class="report-date">Hace 2 días</div>
+            </div>
+            <div class="report-content">
+              <div class="report-product">
+                <div class="product-info">
+                  <h3>Audífonos Inalámbricos Premium</h3>
+                  <div class="product-meta">
+                    <span>Tecnología</span> • <span>$1,299</span>
+                  </div>
+                  <div class="product-seller">Vendedor: AudioPro</div>
+                </div>
+              </div>
+              <div class="report-details">
+                <div class="report-reason">
+                  <strong>Motivo:</strong> Producto falso
+                </div>
+                <div class="report-resolution">
+                  <strong>Resolución:</strong> Producto eliminado y vendedor advertido
+                </div>
+                <div class="report-admin">
+                  <strong>Revisado por:</strong> Admin_Juan • 2 días atrás
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const token = localStorage.getItem('jplace_token');
+    const rawUser = localStorage.getItem('jplace_user');
+    const currentUser = rawUser ? JSON.parse(rawUser) : null;
+    
+    if (!token || !currentUser || currentUser.role !== 'admin') {
+      alert('Acceso denegado.');
+      location.href = 'index.html';
+    }
+
+    function handleReport(action, reportId) {
+      const actions = {
+        dismiss: '¿Desestimar este reporte? El producto no será afectado.',
+        warn: '¿Enviar advertencia al vendedor? El vendedor recibirá una notificación.',
+        remove: '¿Eliminar este producto? Esta acción es permanente.'
+      };
+
+      if (confirm(actions[action])) {
+        // Aquí iría la llamada al API
+        alert(`Acción "${action}" ejecutada para reporte ${reportId}`);
+        location.reload();
+      }
+    }
+  </script>
+</body>
+</html>
