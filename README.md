@@ -56,14 +56,7 @@ cd backend
 npm install
 ```
 
-Crear archivo `.env`:
-```env
-PORT=4000
-MONGODB_URI=mongodb://localhost:27017/jplace
-JWT_SECRET=tu_secreto_super_seguro
-EMAIL_USER=tu_email@gmail.com
-EMAIL_PASS=tu_password_de_app
-```
+
 
 ### 2. Iniciar el servidor
 
